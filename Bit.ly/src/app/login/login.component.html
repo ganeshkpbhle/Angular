@@ -1,0 +1,39 @@
+<div class='container shadow mt-5 py-3 px-3 rounded'>
+    <div class="row p-5 mx-3">
+        <div class='col-xl-12'>
+            <img class='image' src="assets/img/single_user.png" />
+        </div>
+    </div>
+    <form class="Form">
+        <div class='row'>
+            <div class='col-xl-12'>
+                <div class="form-group py-3">
+                    <input class="form-control field"
+                        type="email"
+                        formControlName="email"
+                        placeholder='Email ...' />
+                </div>
+                <div class="form-group py-3">
+                    <input class="form-control field"
+                        type="password"
+                        formControlName="passwd"
+                        placeholder='Passwd ...'/>
+                </div>
+                <div class="form-group py-3">
+                    <button class='form-control field'
+                        type="submit" id='sub'>
+                        Submit
+                    </button>
+                </div>
+                <div class="row p-2">
+                    <p class='link'>Don't Have an Account? <a routerLink="/register">&ensp;SignUp </a></p>
+                </div>
+                <div class='row p-2'>
+                    <div class='col-xl-12'>
+                        <p class='link'><a routerLink='/reset'>Forgot passwd?</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

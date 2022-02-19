@@ -1,0 +1,81 @@
+.text1 {
+    font-family: 'Secular One', sans-serif;
+    font-size: 64px;
+}
+.img-fluid {
+    margin: 0 auto;
+    min-width: 600px;
+    border-radius: 16px;
+}
+.btn{
+    margin: 0 auto;
+    min-width:140px;
+}
+.content {
+    margin-top: 50px;
+}
+
+.text2 {
+    margin-left: 10px;
+    font-size: 28px;
+}
+
+.topbar {
+    margin: 0 auto;
+    margin-bottom: 40px;
+    text-align: center;
+    align-items: center;
+    display:flex;
+    justify-content:space-around;
+}
+.Icon>p {
+    text-decoration: none;
+    font-family:'Pacifico', cursive;
+    color: rgb(248, 76, 45);
+    font-size: 80px;
+    max-width: max-content;
+}
+.center {
+    margin: 0 auto;
+}
+.logo{
+    max-width: fit-content;
+}
+.center>ul {
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+}
+
+.center li {
+    padding: 11px;
+    float: left;
+}
+
+.center a {
+    text-decoration: none;
+    font-family: 'Ubuntu', sans-serif;
+    display: block;
+    padding: 14px 16px;
+    color: cadetblue;
+}
+
+.center li:hover {
+    border-bottom: 2px solid rgb(40, 117, 189);
+}
+.block2 {
+    margin-top: 30px;
+}
+.login:focus,.login:hover{
+    background-color: wheat;
+    color: black;
+}
+.btn{
+    margin: 0 auto;
+    min-width:150px;
+    padding: 10px;
+}
+.block{
+    max-width: fit-content;
+    margin: 0 auto;
+}

@@ -1,0 +1,66 @@
+.Form {
+    margin: 0 auto;
+    max-width: max-content;
+  }
+  .header {
+    font-family: "Concert One", cursive;
+    text-align: center;
+    font-size: 40px;
+  }
+  .form-control {
+    border: 0;
+  }
+  .reg-bg {
+    background-color: rgb(214, 214, 214);
+  }
+  #sub {
+    background-color: rgb(74, 80, 80);
+  }
+  #sub:hover {
+    color: rgb(0, 0, 0);
+    background-color: cornflowerblue;
+  }
+  .img-fluid {
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 8px;
+    border-radius: 16px;
+  }
+  .valid {
+    border-radius: 8px;
+    border: 1px solid green;
+  }
+  .Invalid {
+    border-radius: 8px;
+    border: 1px solid red;
+  }
+  .errtext {
+    font-family: "Varela Round", sans-serif;
+    color: red;
+    margin: 0 auto;
+    font-weight: lighter;
+  }
+  
+  @media screen and (min-width: 900px) {
+    .img-fluid {
+      min-height: 380px;
+      min-width: 640px;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .img-fluid {
+      min-height: 280px;
+      min-width: 400px;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .img-fluid {
+      min-height: 100px;
+      min-width: 120px;
+    }
+  }
+  .link {
+    font-size: 18px;
+    text-align: center;
+  }
+  
