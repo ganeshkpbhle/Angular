@@ -1,1 +1,10 @@
-<p>home works!</p>
+<div class="container-fluid">
+    <div class="row" *ngIf="userInfo!==undefined">
+        <div class="w-100">
+            <app-nav [(user)]="userInfo"></app-nav>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <router-outlet></router-outlet>
+    </div>
+</div>

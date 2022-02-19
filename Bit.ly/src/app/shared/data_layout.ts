@@ -17,7 +17,7 @@ export interface _LoginResponse{
     id:number
 }
 export interface _Logout{
-    Del:number
+    Del:number|undefined
 }
 export interface _PostUrl{
     UrlId:string,
@@ -52,6 +52,8 @@ export interface _UrlList{
     count:number
 }
 export interface _UserInfo{
+    id:number,
+    gId:string,
     firstName:string,
     lastName:string,
     mobile:string,

@@ -62,7 +62,7 @@ export class ApiService {
   };
   getUserSimple = (id: number) => {
     this.setHeader();
-    return this.http.get<layout._UserInfo>(`${environment.API_URL}user/getRes/${id}`,{ headers:this.header });
+    return this.http.get<layout._UserInfo>(`${environment.API_URL}user/${id}`,{ headers:this.header });
   };
   getUserBymail = (mail:string) => {
     return this.http.get<layout._LoginResponse|boolean>(`${environment.API_URL}user/getEmail/${mail}`);
