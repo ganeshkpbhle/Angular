@@ -21,6 +21,14 @@
     margin: 0 auto;
     font-weight: lighter;
   }
+  .valid {
+    border-radius: 8px;
+    border: 1px solid green;
+  }
+  .Invalid {
+    border-radius: 8px;
+    border: 1px solid red;
+  }
   .field {
     min-width: 400px;
     border-radius: 5px;

@@ -6,12 +6,17 @@ import * as layout from '../shared/data_layout';
   providedIn: 'root'
 })
 export class ApiService {
-
+  private header:HttpHeaders|undefined;
   constructor(private http: HttpClient) { }
   setHeader = () => {
-    if (localStorage["user"]) {
-      const data = JSON.parse(localStorage["user"]);
-
+    if (localStorage["user"]!==null) {
+      const data:layout._LoginResponse = JSON.parse(localStorage["user"]);
+      this.header=new HttpHeaders(
+        {
+          'Content-Type':'application/json',
+          'Authorization':`Bearer ${data.token}`
+        }
+      );
     }
     else { alert("You are an unAuthorized User"); }
   };
@@ -26,52 +31,52 @@ export class ApiService {
   };
   logout = (data:layout._Logout) => {
     this.setHeader();
-    return this.http.post<number>(`${environment.API_URL}user/logout`,data);
+    return this.http.post<number>(`${environment.API_URL}user/logout`,data,{ headers:this.header });
   };
   addUrl = (url: layout._PostUrl) => {
     this.setHeader();
-    return this.http.post<string>(`${environment.API_URL}url`, url);
+    return this.http.post<string>(`${environment.API_URL}url`, url,{ headers:this.header });
   };
   verifyEmail = (data:layout._SendMail) => {
     this.setHeader();
-    return this.http.post<string>(`${environment.API_URL}verify/Email`, data);
+    return this.http.post<string>(`${environment.API_URL}verify/Email`, data,{ headers:this.header });
   };
   vfcApi = (data:layout._Vfc) => {
     this.setHeader();
-    return this.http.post<boolean>(`${environment.API_URL}verify/post`,data);
+    return this.http.post<boolean>(`${environment.API_URL}verify/post`,data,{ headers:this.header });
   };
   ComputeDate = (user: layout._UrlCompute) => {
     this.setHeader();
-    return this.http.post<layout._ComputeResult>(`${environment.API_URL}url/date`, user);
+    return this.http.post<layout._ComputeResult>(`${environment.API_URL}url/date`, user,{ headers:this.header });
   };
 
   //get
 
   getUrlById = (id: string) => {
     this.setHeader();
-    return this.http.get<string>(`${environment.API_URL}url/getId/${id}`);
+    return this.http.get<string>(`${environment.API_URL}url/getId/${id}`,{ headers:this.header });
   };
   getUrls = (id: number) => {
     this.setHeader();
-    return this.http.get<Array<layout._UrlList>>(`${environment.API_URL}url/getlist/${id}`);
+    return this.http.get<Array<layout._UrlList>>(`${environment.API_URL}url/getlist/${id}`,{ headers:this.header });
   };
   getUserSimple = (id: number) => {
     this.setHeader();
-    return this.http.get(`${environment.API_URL}user/getRes/${id}`);
+    return this.http.get<layout._UserInfo>(`${environment.API_URL}user/getRes/${id}`,{ headers:this.header });
   };
-  getUserBymail = (mail: any) => {
-    return this.http.get(`${environment.API_URL}user/getEmail/${mail}`);
+  getUserBymail = (mail:string) => {
+    return this.http.get<layout._LoginResponse|boolean>(`${environment.API_URL}user/getEmail/${mail}`);
   };
 
   //put
-  updateUser = (id: number, data: any) => {
+  updateUser = (id: number, data: layout._UpdateProf) => {
     this.setHeader();
-    return this.http.put(`${environment.API_URL}user/${id}`, data);
+    return this.http.put<boolean>(`${environment.API_URL}user/${id}`, data,{ headers:this.header });
   };
 
   //delete
   delUrl = (id:number) => {
     this.setHeader();
-    return this.http.delete(`${environment.API_URL}url/${id}`);
+    return this.http.delete(`${environment.API_URL}url/${id}`,{ headers:this.header });
 };
 }

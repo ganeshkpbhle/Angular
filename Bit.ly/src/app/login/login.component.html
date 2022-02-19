@@ -4,17 +4,17 @@
             <img class='image' src="assets/img/single_user.png" />
         </div>
     </div>
-    <form class="Form">
+    <form class="Form" [formGroup]="form" (ngSubmit)="submit()">
         <div class='row'>
             <div class='col-xl-12'>
                 <div class="form-group py-3">
-                    <input class="form-control field"
+                    <input [ngClass]="{'form-control field':true,'Invalid':m['email'].invalid && m['email'].dirty,'valid':m['email'].valid && m['email'].dirty}"
                         type="email"
                         formControlName="email"
                         placeholder='Email ...' />
                 </div>
                 <div class="form-group py-3">
-                    <input class="form-control field"
+                    <input [ngClass]="{'form-control field':true,'Invalid':m['passwd'].invalid && m['passwd'].dirty}"
                         type="password"
                         formControlName="passwd"
                         placeholder='Passwd ...'/>

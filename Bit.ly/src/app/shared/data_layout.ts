@@ -51,3 +51,18 @@ export interface _UrlList{
     urls:Array<_UrlItem>,
     count:number
 }
+export interface _UserInfo{
+    firstName:string,
+    lastName:string,
+    mobile:string,
+    email:string,
+    emailVerified:number,
+    snType:string
+}
+export interface _UpdateProf{
+    Id:number,
+    FirstName:string,
+    LastName:string,
+    Mobile:string,
+    Email:string
+}

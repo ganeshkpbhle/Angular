@@ -4,7 +4,7 @@
             <p class="header">Register Now To short Your Url</p>
         </div>
     </div>
-    <form class="Form py-2" [formGroup]="form">
+    <form class="Form py-2" [formGroup]="form" (ngSubmit)="submit()">
         <div class="row p-4">
             <div class="col-xl-5">
                 <div class="form-group my-2 p-1">
