@@ -1,0 +1,63 @@
+.card {
+    background-color: rgb(228, 212, 212);
+    min-width: 500px;
+}
+.card-header {
+    color: red;
+}
+.month-header{
+    color: aliceblue;
+    font-size: 20px;
+}
+.card-body {
+    color: rgb(252, 243, 243);
+}
+#holder{
+    min-height: 60px;
+    margin: 0 auto;
+    min-width: 600px;
+    max-width: 700px;
+    font-size: 20px;
+    border-radius: 12px;
+}
+#rslt{
+    min-height: 40px;
+    margin: 0 auto;
+    max-width:200px;
+    min-width: 100px;
+    font-size: 20px;
+    border-radius: 8px;
+}
+.Box button {
+    min-width: 120px;
+    font-size: 18px;
+}
+.Box a{
+    cursor: pointer;
+}
+.warn {
+    display: flex;
+    justify-content: flex-end;
+}
+.custom-b {
+    text-decoration: none;
+}
+
+.custom-cont {
+    min-width: max-content;
+    max-width:700px;
+}
+.errtext {
+    font-family: "Varela Round", sans-serif;
+    color: red;
+    margin: 0 auto;
+    font-weight: lighter;
+  }
+  .valid {
+    border-radius: 8px;
+    border: 1px solid green;
+  }
+  .Invalid {
+    border-radius: 8px;
+    border: 1px solid red;
+  }

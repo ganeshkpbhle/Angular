@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (response:_UserInfo)=>{
           this.userInfo=response;
+          this._apiservice.setUserInfo(response);
         },
         (e)=>{
           console.log(e.error);

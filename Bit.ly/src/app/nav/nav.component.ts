@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
   SideElements:any = [
     {
       title: "Home",
-      path: '/home/dash',
+      path: 'dash',
       cName: 'nav-text',
       icon: "fa-solid fa-house fa-1.5x",
       active: "act",
@@ -24,7 +24,7 @@ export class NavComponent implements OnInit {
     },
     {
       title: "History",
-      path: '/home/history',
+      path: 'history',
       cName: 'nav-text',
       icon: "fa-solid fa-clock-rotate-left fa-1.5x",
       active: "act",
@@ -32,7 +32,7 @@ export class NavComponent implements OnInit {
     },
     {
       title: "Profile",
-      path: '/home/profile',
+      path: 'profile',
       cName: 'nav-text',
       icon: "fa-solid fa-id-card fa-1.5x",
       active: "act",
