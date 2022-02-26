@@ -1,0 +1,142 @@
+.card {
+    background-color: rgb(228, 212, 212);
+    min-width: 500px;
+}
+
+.list-cards:hover {
+    cursor: pointer;
+    border: 1px solid rgb(156, 156, 182);
+}
+
+.list-cards>.card-body>.card-title {
+    font-size: 30px;
+}
+
+.list-cards>.card-body>.card-text {
+    font-size: 24px;
+}
+.list-cards {
+    max-width:260px;
+    min-width: 240px;
+}
+.flex-cont {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-item {
+    margin: 0px 20px 0px 0px;
+    width: 30vh;
+    display: flex;
+    flex-direction: column;
+    max-width:max-content;
+}
+@media screen and (min-width: 650px) {
+    .flex-item {
+        margin: 0px 7px 0px 0px;
+        display: flex;
+        flex-direction: column;
+        max-width:max-content;
+    }
+    .list-cards {
+        max-width:230px;
+        min-width: 120px;
+    }
+    .list-cards>.card-body>.card-title {
+        font-size: 22px;
+    }
+    
+    .list-cards>.card-body>.card-text {
+        font-size: 18px;
+    }
+    .flex-list {
+        flex-wrap: wrap;
+        justify-content: stretch;
+        min-width: 300px;
+        max-width: fit-content;
+    }
+    .flex-list a{
+        text-decoration: none;
+        font-family: 'Secular One', sans-serif;
+        font-size: 12px;
+        padding: 12px;
+    }
+    .list-item{
+        max-width: fit-content;
+    }
+    .date-text{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 12px;
+        margin: 0 auto;
+    }
+}
+@media screen and (min-width: 1165px) {
+    .flex-item {
+        margin: 0px 14px 0px 0px;
+        display: flex;
+        flex-direction: column;
+        max-width:max-content;
+    }
+    .list-cards {
+        max-width:230px;
+        min-width: 170px;
+    }
+    .list-cards>.card-body>.card-title {
+        font-size: 26px;
+    }
+    
+    .list-cards>.card-body>.card-text {
+        font-size: 22px;
+    }
+    .flex-list {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        min-width: 550px;
+    }
+    .flex-list a{
+        text-decoration: none;
+        font-family: 'Secular One', sans-serif;
+        font-size: 16px;
+        padding: 8px;
+    }
+    .date-text{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 16px;
+        margin: 0 auto;
+    }
+}
+@media screen and (min-width: 1629px) {
+    .flex-item {
+        margin: 0px 18px 0px 0px;
+        display: flex;
+        flex-direction: column;
+        max-width:max-content;
+    }
+    .list-cards>.card-body>.card-title {
+        font-size: 30px;
+    }
+    
+    .list-cards>.card-body>.card-text {
+        font-size: 24px;
+    }
+    .list-cards {
+        max-width:260px;
+        min-width: 200px;
+    }
+    .flex-list {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        min-width: 650px;
+    }
+    .flex-list a{
+        text-decoration: none;
+        font-family: 'Secular One', sans-serif;
+        font-size: 18px;
+        padding: 8px;
+    }
+    .date-text{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 16px;
+        margin: 0 auto;
+    }
+} 

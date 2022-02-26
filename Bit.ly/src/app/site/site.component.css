@@ -16,8 +16,9 @@
 }
 
 .text2 {
-    margin-left: 10px;
+    line-height: 1.6;
     font-size: 28px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .topbar {

@@ -3,8 +3,13 @@
         <div class="w-100">
             <app-nav [(user)]="userInfo"></app-nav>
         </div>
+        <div class='w-100' *ngIf="loader.isLoading | async">
+            <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
+        </div>
     </div>
     <div class="row justify-content-center">
-        <router-outlet></router-outlet>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+            <router-outlet (activate)="onActivate($event)"></router-outlet>
+        </div>
     </div>
 </div>

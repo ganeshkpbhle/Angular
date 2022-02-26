@@ -38,8 +38,8 @@ export interface _UrlCompute{
     Opt:number
 }
 export interface _ComputeResult{
-    Name:string,
-    Active_Count:number
+    name:string,
+    value:number
 }
 interface _UrlItem{
     urlId:string,
@@ -67,4 +67,8 @@ export interface _UpdateProf{
     LastName:string,
     Mobile:string,
     Email:string
+}
+export interface _FeedPattn{
+    name:string,
+    series:Array<_ComputeResult>
 }

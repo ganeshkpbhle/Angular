@@ -1,0 +1,50 @@
+.flex-list {
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.flex-list a{
+    text-decoration: none;
+    font-family: 'Secular One', sans-serif;
+    font-size: 16px;
+}
+.date-text{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 16px;
+    margin: 0 auto;
+}
+@media screen and (min-width: 650px) {
+    .flex-list {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        min-width: 550px;
+    }
+    .flex-list a{
+        text-decoration: none;
+        font-family: 'Secular One', sans-serif;
+        font-size: 16px;
+        padding: 8px;
+    }
+    .date-text{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 16px;
+        margin: 0 auto;
+    }
+}
+@media screen and (min-width: 1629px) {
+    .flex-list {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        min-width: 650px;
+    }
+    .flex-list a{
+        text-decoration: none;
+        font-family: 'Secular One', sans-serif;
+        font-size: 18px;
+        padding: 8px;
+    }
+    .date-text{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 16px;
+        margin: 0 auto;
+    }
+}

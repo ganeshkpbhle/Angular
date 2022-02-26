@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment.prod';
 import * as layout from '../shared/data_layout';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { LoaderService } from './loader.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private header: HttpHeaders | undefined;
   private Info: layout._UserInfo | undefined;
-  constructor(private http: HttpClient) { }
+  private HistoryData:Array<layout._UrlList>=[];
+  constructor(private http: HttpClient,private loader:LoaderService) { }
   setHeader = () => {
     if (localStorage["user"] !== null) {
       const data: layout._LoginResponse = JSON.parse(localStorage["user"]);
@@ -49,7 +51,7 @@ export class ApiService {
   };
   ComputeDate = (user: layout._UrlCompute) => {
     this.setHeader();
-    return this.http.post<layout._ComputeResult>(`${environment.API_URL}url/date`, user, { headers: this.header });
+    return this.http.post<Array<layout._ComputeResult>>(`${environment.API_URL}url/date`, user, { headers: this.header });
   };
 
   //get
@@ -85,7 +87,21 @@ export class ApiService {
     const observeInfo=new Observable<layout._UserInfo>(
       (observer)=>{
         setTimeout(()=>{
-          observer.next(this.Info);
+          if(this.Info){
+            observer.next(this.Info);
+          }
+        },1000);
+      }
+    );
+    return observeInfo;
+  };
+  getHistory():Observable<Array<layout._UrlList>>{
+    const observeInfo=new Observable<Array<layout._UrlList>>(
+      (observer)=>{
+        setTimeout(()=>{
+          if(this.HistoryData.length!==0){
+            observer.next(this.HistoryData);
+          }
         },1000);
       }
     );
@@ -93,5 +109,8 @@ export class ApiService {
   };
   setUserInfo = (param: layout._UserInfo) => {
     this.Info = param;
+  };
+  setHistory=(param:Array<layout._UrlList>)=>{
+    this.HistoryData=param;
   };
 }

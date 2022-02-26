@@ -3,7 +3,8 @@
         <form class='Box' [formGroup]="form" (ngSubmit)="submit()">
             <div class="d-inline-flex flex-column bd-highlight">
                 <div class="p-2 form-group">
-                    <input type='text' formControlName='url' id="holder" placeholder='Enter Your URL Here ...' [ngClass]="{'form-control field':true,'Invalid':m['url'].invalid && m['url'].dirty,'valid':m['url'].valid && m['url'].dirty}"/>
+                    <input type='text' formControlName='url' id="holder" placeholder='Enter Your URL Here ...'
+                        [ngClass]="{'form-control field':true,'Invalid':m['url'].invalid && m['url'].dirty,'valid':m['url'].valid && m['url'].dirty}" />
                 </div>
                 <div class='form-group p-2'>
                     <div class="d-flex flex-row align-items-center justify-content-center">
@@ -13,7 +14,8 @@
                         <div class="p-2 bd-highlight">
                             <button class='form-control btn btn-primary' (click)="clear()">Clear</button>
                         </div>
-                        <div class="p-2 bd-highlight"><input type="text" formControlName="result" class='form-control' id="rslt" readonly /></div>
+                        <div class="p-2 bd-highlight"><input type="text" formControlName="result" class='form-control'
+                                id="rslt" readonly /></div>
                         <div class="p-2 bd-highlight">
                             <a [routerLink]=""><i class="fa-solid fa-copy">&emsp; Copy</i></a>
                         </div>
@@ -21,5 +23,14 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+<div class='container shadow mt-5 py-3 px-3 rounded custom-cont' *ngIf="graphFeed.length!==0">
+    <div class="row">
+        <div class="w-100">
+            <ngx-charts-line-chart [view]="view" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [results]="graphFeed" [autoScale]="true">
+            </ngx-charts-line-chart>
+        </div>
     </div>
 </div>

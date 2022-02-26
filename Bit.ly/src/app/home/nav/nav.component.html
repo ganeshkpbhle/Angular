@@ -21,7 +21,7 @@
             </div>
         </li>
         <li *ngFor="let item of SideElements;" [ngClass]="item?.cName">
-            <a [routerLink]="item?.path"><i [ngClass]="item?.icon">&emsp;{{item?.title}}</i></a>
+            <a [routerLink]="item?.path" routerLinkActive="act"><i [ngClass]="item?.icon">&emsp;{{item?.title}}</i></a>
         </li>
     </ul>
 </nav>

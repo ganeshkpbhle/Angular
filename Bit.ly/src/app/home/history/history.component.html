@@ -1,0 +1,27 @@
+<div class="d-inline-flex flex-column p-2 bd-highlight">
+    <div class='flex-cont bd-highlight my-2' *ngIf="_history && _history.length!==0">
+        <div *ngFor="let item of _history;let i=index">
+            <div class='flex-item'>
+                <div class="card list-cards my-3" [routerLink]="[item.name]">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.name}}</h5>
+                        <p class="card-text">{{item.count}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='bd-highlight' *ngIf="graphFeed.length!==0">
+    <ngx-charts-pie-chart
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="graphFeed"
+  [gradient]="gradient"
+  [legend]="showLegend"
+  [legendPosition]="legend"
+  [labels]="showLabels"
+  [doughnut]="isDoughnut"
+  >
+</ngx-charts-pie-chart>
+</div>

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
-import { ApiService } from '../services/api.service';
-import { _Logout, _UserInfo } from '../shared/data_layout';
+import { ApiService } from '../../services/api.service';
+import { _Logout, _UserInfo } from '../../shared/data_layout';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
