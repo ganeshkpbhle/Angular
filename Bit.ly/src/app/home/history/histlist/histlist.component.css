@@ -1,21 +1,40 @@
 .flex-list {
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content:space-between;
 }
 .flex-list a{
     text-decoration: none;
     font-family: 'Secular One', sans-serif;
     font-size: 16px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+.month-header{
+    color: aliceblue;
+    font-size: 28px;
 }
 .date-text{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Secular One', sans-serif;
     font-size: 16px;
+    margin: 0 auto;
+}
+.short-form{
+    font-family: 'Secular One', sans-serif;
+    font-size: 16px;
+    margin: 0 auto;
+}
+.nav-button{
+    border-radius:25px;
+    padding: 2px;
+}
+i{
     margin: 0 auto;
 }
 @media screen and (min-width: 650px) {
     .flex-list {
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content:space-between;
         min-width: 550px;
     }
     .flex-list a{
@@ -23,9 +42,15 @@
         font-family: 'Secular One', sans-serif;
         font-size: 16px;
         padding: 8px;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+    .list-item{
+        max-width: fit-content;
     }
     .date-text{
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Secular One', sans-serif;
         font-size: 16px;
         margin: 0 auto;
     }
@@ -33,17 +58,20 @@
 @media screen and (min-width: 1629px) {
     .flex-list {
         flex-wrap: wrap;
-        justify-content: space-between;
-        min-width: 650px;
+        justify-content:space-between;
+        min-width: 680px;
     }
     .flex-list a{
         text-decoration: none;
         font-family: 'Secular One', sans-serif;
         font-size: 18px;
         padding: 8px;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
     }
     .date-text{
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Secular One', sans-serif;
         font-size: 16px;
         margin: 0 auto;
     }

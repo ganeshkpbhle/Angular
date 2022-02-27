@@ -1,1 +1,52 @@
-<p>histlist works!</p>
+<div class="card">
+    <div class="card-header month-header">
+        <div class="d-inline-flex flex-row justify-content-between align-items-center p-2 bd-highlight flex-list">
+            <div class="p-2 bd-highlight list-item">
+                <a [routerLink]="['../',prevMonth]" class="btn btn-primary nav-button" *ngIf="monthIndex>0">
+                    <i class="fa-solid fa-chevron-left fa-2x"></i>
+                </a>
+            </div>
+            <div class="p-2 bd-highlight list-item">
+                <p class="month-header">
+                    {{month}}
+                </p>
+            </div>
+            <div class="p-2 bd-highlight list-item">
+                <a class="btn btn-primary nav-button" *ngIf="monthIndex<maxLen-1" [routerLink]="['../',nxtMonth]">
+                    <i class="fa-solid fa-chevron-right fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <div class='w-100' *ngIf="loader.deleteProgress | async">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+    </div>
+    <div class="card-body" *ngIf="currMonth.length!==0">
+        <div class="d-flex flex-column-reverse bd-highlight">
+            <div *ngFor="let item of currMonth">
+                <div class="p-2 my-2 bd-highlight shadow-sm bg-body rounded">
+                    <div class="d-inline-flex flex-row align-items-bottom p-2 bd-highlight flex-list">
+                        <div class="p-2 bd-highlight list-item">
+                            <a [href]="item.longUrl" target='_blank'>
+                                {{item.longUrl}}
+                            </a>
+                        </div>
+                        <div class="p-2 bd-highlight list-item">
+                            <p class='date-text'>
+                                {{item?.createdDate?.replaceAll('T', ' ')}}
+                            </p>
+                        </div>
+                        <div class="p-2 bd-highlight list-item">
+                            <p class="short-form">{{"bit.ly/"+item.urlId}}</p>
+                        </div>
+                        <div class="p-2 bd-highlight list-item">
+                            <button class='btn btn-danger' [id]="item.urlId" (click)="handleDelete(item.urlId)">
+                                <i class="fa-solid fa-trash fa-1x"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

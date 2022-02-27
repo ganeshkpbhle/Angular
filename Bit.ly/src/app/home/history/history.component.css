@@ -61,9 +61,6 @@
         font-size: 12px;
         padding: 12px;
     }
-    .list-item{
-        max-width: fit-content;
-    }
     .date-text{
         font-family: 'Ubuntu', sans-serif;
         font-size: 12px;

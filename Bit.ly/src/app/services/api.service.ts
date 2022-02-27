@@ -4,14 +4,15 @@ import { environment } from 'src/environments/environment.prod';
 import * as layout from '../shared/data_layout';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LoaderService } from './loader.service';
+import { _UrlList } from '../shared/data_layout';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private header: HttpHeaders | undefined;
   private Info: layout._UserInfo | undefined;
-  private HistoryData:Array<layout._UrlList>=[];
-  constructor(private http: HttpClient,private loader:LoaderService) { }
+  private HistoryData: Array<layout._UrlList> = [];
+  constructor(private http: HttpClient, private loader: LoaderService) { }
   setHeader = () => {
     if (localStorage["user"] !== null) {
       const data: layout._LoginResponse = JSON.parse(localStorage["user"]);
@@ -78,31 +79,33 @@ export class ApiService {
   };
 
   //delete
-  delUrl = (id: number) => {
+  delUrl = (id: string) => {
     this.setHeader();
-    return this.http.delete(`${environment.API_URL}url/${id}`, { headers: this.header });
+    return this.http.delete<boolean>(`${environment.API_URL}url/${id}`, { headers: this.header });
   };
 
-  getUserInfo():Observable<layout._UserInfo>{
-    const observeInfo=new Observable<layout._UserInfo>(
-      (observer)=>{
-        setTimeout(()=>{
-          if(this.Info){
+
+  //customized methods for data accessing
+  getUserInfo(): Observable<layout._UserInfo> {
+    const observeInfo = new Observable<layout._UserInfo>(
+      (observer) => {
+        setTimeout(() => {
+          if (this.Info) {
             observer.next(this.Info);
           }
-        },1000);
+        }, 800);
       }
     );
     return observeInfo;
   };
-  getHistory():Observable<Array<layout._UrlList>>{
-    const observeInfo=new Observable<Array<layout._UrlList>>(
-      (observer)=>{
-        setTimeout(()=>{
-          if(this.HistoryData.length!==0){
+  getHistory(): Observable<Array<layout._UrlList>> {
+    const observeInfo = new Observable<Array<layout._UrlList>>(
+      (observer) => {
+        setTimeout(() => {
+          if (this.HistoryData.length !== 0) {
             observer.next(this.HistoryData);
           }
-        },1000);
+        }, 500);
       }
     );
     return observeInfo;
@@ -110,7 +113,15 @@ export class ApiService {
   setUserInfo = (param: layout._UserInfo) => {
     this.Info = param;
   };
-  setHistory=(param:Array<layout._UrlList>)=>{
-    this.HistoryData=param;
+  setHistory = (param: Array<layout._UrlList>) => {
+    this.HistoryData = param;
+  };
+  updateHistory = (id: number) => {
+    this.getUrls(id)
+      .subscribe(
+        (response: Array<_UrlList>) => {
+          this.HistoryData=response;
+        }
+      );
   };
 }

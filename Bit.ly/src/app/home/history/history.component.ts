@@ -11,15 +11,15 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 })
 export class HistoryComponent implements OnInit {
   _history: Array<_UrlList> | undefined;
-  graphFeed:Array<_ComputeResult>=[];
+  graphFeed: Array<_ComputeResult> = [];
   // options for Pie
   gradient: boolean = true;
   showLegend: boolean = true;
   showLabels: boolean = true;
   isDoughnut: boolean = true;
-  legend:any="below"
-  view: any = [700, 500];
-  colorScheme:any = {
+  legend: any = "right"
+  view: any = [600, 400];
+  colorScheme: any = {
     domain: ['#33FFE7', '#33FF89', '#FFBB28', '#7933FF', '#C70039', '#FF8042', '#035652', '#886119', '#FF33F3', '#E91A1A', '#FFFFFF', '#250505']
   };
 
@@ -27,28 +27,18 @@ export class HistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._apiservice.getUserInfo()
+    this._apiservice.getHistory()
       .subscribe(
-        (result: _UserInfo) => {
-          this._apiservice.getUrls(result.id)
-            .subscribe(
-              (response: Array<_UrlList>) => {
-                this._apiservice.setHistory(response);
-                this._history = response;
-                this.loader.isLoading.next(false);
-                this._history.forEach(item =>{
-                  this.graphFeed.push({name:item.name,value:item.count});
-                });
-              },
-              (e) => {
-                console.log(e.error);
-              }
-            );
+        (result: Array<_UrlList>) => {
+          this._history = result;
+          this.loader.isLoading.next(false);
+          this._history.forEach(item => {
+            this.graphFeed.push({ name: item.name, value: item.count });
+          });
         },
-        (e) => {
+        (e)=>{
           console.log(e.error);
         }
       );
-  }
-
+  };
 }

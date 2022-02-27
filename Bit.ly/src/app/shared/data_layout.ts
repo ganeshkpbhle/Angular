@@ -41,7 +41,7 @@ export interface _ComputeResult{
     name:string,
     value:number
 }
-interface _UrlItem{
+export interface _UrlItem{
     urlId:string,
     longUrl:string,
     createdDate:string

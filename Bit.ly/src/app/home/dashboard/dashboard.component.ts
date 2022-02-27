@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms';
-import { _ComputeResult, _FeedPattn, _PostUrl, _UrlCompute, _UserInfo } from '../../shared/data_layout';
+import { _ComputeResult, _FeedPattn, _PostUrl, _UrlCompute, _UrlList, _UserInfo } from '../../shared/data_layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -85,6 +85,14 @@ export class DashboardComponent implements OnInit {
           (response: boolean) => {
             if (response) {
               this.form.patchValue({ result: `bit.ly/${payload.UrlId}` });
+              if(this.info){
+                this._apiservice.getUrls(this.info?.id)
+                .subscribe(
+                  (response1:Array<_UrlList>)=>{
+                    this._apiservice.setHistory(response1);
+                  }
+                );
+              }
             }
           },
           (e) => {

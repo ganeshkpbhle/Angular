@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { LoaderService } from '../services/loader.service';
-import { _LoginResponse, _UserInfo } from '../shared/data_layout';
+import { _LoginResponse, _UrlList, _UserInfo } from '../shared/data_layout';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,14 @@ import { _LoginResponse, _UserInfo } from '../shared/data_layout';
 })
 export class HomeComponent implements OnInit {
   userInfo: _UserInfo | undefined;
-  constructor(private _apiservice: ApiService, public loader: LoaderService) { }
+  InProgress:boolean=false;
+  constructor(private _apiservice: ApiService, public loader: LoaderService) {
+      loader.isLoading.subscribe(
+        (result:boolean)=>{
+          this.InProgress=result;
+        }
+      );
+  }
 
   ngOnInit(): void {
     const store: string | null = localStorage.getItem("user");
@@ -21,6 +28,15 @@ export class HomeComponent implements OnInit {
           (response: _UserInfo) => {
             this.userInfo = response;
             this._apiservice.setUserInfo(response);
+            this._apiservice.getUrls(response.id)
+            .subscribe(
+              (response: Array<_UrlList>) => {
+                this._apiservice.setHistory(response);
+              },
+              (e) => {
+                console.log(e.error);
+              }
+            );
           },
           (e) => {
             console.log(e.error);
