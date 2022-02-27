@@ -1,1 +1,23 @@
-<p>profile works!</p>
+<div class="container shadow-sm mt-5 py-3 px-3 rounded">
+    <form class="Form py-2" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="row p-4">
+            <div class="col-xl-5">
+                <div class="form-group my-2 p-1">
+                    <input [ngClass]="{'form-control field':true,'Invalid':m['email'].invalid && m['email'].dirty,'valid':m['email'].valid && m['email'].dirty}" type="email"
+                        formControlName="email" placeholder="Email ..." />
+                </div>
+                <div [ngClass]="{'form-group':true}">
+                    <input [ngClass]="{'form-control field':true,'Invalid':m['mobile'].invalid && m['mobile'].dirty,'valid':m['mobile'].valid && m['mobile'].dirty}" type="text"
+                        formControlName="mobile" placeholder="Mobile Number ..." />
+                </div>
+                <div class="row p-3">
+                    <div class="col-xl-12">
+                        <div class="form-group mt-1">
+                            <button class="form-control" type="submit" [disabled]="form.invalid||form.pristine" id="sub">SaveChanges</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

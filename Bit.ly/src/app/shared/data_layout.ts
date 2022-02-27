@@ -72,3 +72,6 @@ export interface _FeedPattn{
     name:string,
     series:Array<_ComputeResult>
 }
+export interface _UpdateConfirm{
+    update:boolean
+}

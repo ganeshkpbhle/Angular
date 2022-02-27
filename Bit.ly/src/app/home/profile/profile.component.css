@@ -1,0 +1,41 @@
+.Form {
+    margin: 0 auto;
+    max-width: max-content;
+  }
+  .header {
+    font-family: "Concert One", cursive;
+    text-align: center;
+    font-size: 40px;
+  }
+  .form-control {
+    border: 0;
+  }
+  .reg-bg {
+    background-color: rgb(214, 214, 214);
+  }
+  #sub {
+    background-color: rgb(74, 80, 80);
+  }
+  #sub:hover {
+    color: rgb(0, 0, 0);
+    background-color: cornflowerblue;
+  }
+  .field {
+    min-width: 400px;
+    border-radius: 5px;
+    border-bottom: 1px solid rgb(183, 183, 240);
+  }
+  .valid {
+    border-radius: 8px;
+    border: 1px solid green;
+  }
+  .Invalid {
+    border-radius: 8px;
+    border: 1px solid red;
+  }
+  .errtext {
+    font-family: "Varela Round", sans-serif;
+    color: red;
+    margin: 0 auto;
+    font-weight: lighter;
+  }

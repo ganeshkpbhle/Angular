@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment.prod';
 import * as layout from '../shared/data_layout';
@@ -12,6 +12,8 @@ export class ApiService {
   private header: HttpHeaders | undefined;
   private Info: layout._UserInfo | undefined;
   private HistoryData: Array<layout._UrlList> = [];
+  HistoryUpdated:EventEmitter<Array<layout._UrlList>>=new EventEmitter<Array<layout._UrlList>>();
+  UserInfoUpdated:EventEmitter<layout._UserInfo>=new EventEmitter<layout._UserInfo>();
   constructor(private http: HttpClient, private loader: LoaderService) { }
   setHeader = () => {
     if (localStorage["user"] !== null) {
@@ -75,7 +77,7 @@ export class ApiService {
   //put
   updateUser = (id: number, data: layout._UpdateProf) => {
     this.setHeader();
-    return this.http.put<boolean>(`${environment.API_URL}user/${id}`, data, { headers: this.header });
+    return this.http.put<layout._UpdateConfirm>(`${environment.API_URL}user/${id}`, data, { headers: this.header });
   };
 
   //delete
@@ -93,7 +95,7 @@ export class ApiService {
           if (this.Info) {
             observer.next(this.Info);
           }
-        }, 800);
+        },400);
       }
     );
     return observeInfo;
@@ -105,22 +107,25 @@ export class ApiService {
           if (this.HistoryData.length !== 0) {
             observer.next(this.HistoryData);
           }
-        }, 500);
+        }, 400);
       }
     );
     return observeInfo;
   };
   setUserInfo = (param: layout._UserInfo) => {
     this.Info = param;
+    this.UserInfoUpdated.emit(param);
   };
   setHistory = (param: Array<layout._UrlList>) => {
     this.HistoryData = param;
+    this.HistoryUpdated.emit(param);
   };
   updateHistory = (id: number) => {
     this.getUrls(id)
       .subscribe(
         (response: Array<_UrlList>) => {
           this.HistoryData=response;
+          this.HistoryUpdated.emit(response);
         }
       );
   };

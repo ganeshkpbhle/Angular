@@ -10,7 +10,7 @@ import { _UrlItem, _UrlList, _UserInfo } from 'src/app/shared/data_layout';
   styleUrls: ['./histlist.component.css']
 })
 export class HistlistComponent implements OnInit {
-  user: _UserInfo | undefined;
+  user?: _UserInfo;
   currMonth: Array<_UrlItem> = [];
   month: string = "";
   monthIndex: number = -1;
@@ -22,27 +22,18 @@ export class HistlistComponent implements OnInit {
       (param) => {
         this.month = param['month'];
         loader.isLoading.next(true);
+        this._apiservice.HistoryUpdated.subscribe(
+          (result: Array<_UrlList>) => {
+            this.onLoad(result);
+          }
+        );
         this._apiservice.getHistory()
           .subscribe(
             (result: Array<_UrlList>) => {
-              this.maxLen = result.length;
-              this.monthIndex = result.findIndex(x => x.name === this.month);
-              if (this.monthIndex != -1) {
-                this.currMonth = result[this.monthIndex].urls;
-                if (this.monthIndex === 0) {
-                  this.nxtMonth = result[this.monthIndex + 1].name;
-                }
-                else if (this.monthIndex === result.length - 1) {
-                  this.prevMonth = result[this.monthIndex - 1].name;
-                }
-                else {
-                  this.nxtMonth = result[this.monthIndex + 1].name;
-                  this.prevMonth = result[this.monthIndex - 1].name;
-                }
-              }
-              this.loader.isLoading.next(false);
+                this.onLoad(result);
             }
           );
+
         _apiservice.getUserInfo()
           .subscribe(
             (result: _UserInfo) => {
@@ -53,9 +44,9 @@ export class HistlistComponent implements OnInit {
     );
   };
   ngOnInit(): void { };
-  handleDelete = (urlId:string) => {
+  handleDelete = (urlId: string) => {
     this.loader.deleteProgress.next(true);
-    if (urlId.length!==0 && urlId) {
+    if (urlId.length !== 0 && urlId) {
       this._apiservice.delUrl(urlId)
         .subscribe(
           (response: boolean) => {
@@ -72,5 +63,23 @@ export class HistlistComponent implements OnInit {
           }
         );
     }
+  };
+  onLoad = (result: Array<_UrlList>) => {
+    this.maxLen = result.length;
+    this.monthIndex = result.findIndex(x => x.name === this.month);
+    if (this.monthIndex != -1) {
+      this.currMonth = result[this.monthIndex].urls;
+      if (this.monthIndex === 0) {
+        this.nxtMonth = result[this.monthIndex + 1].name;
+      }
+      else if (this.monthIndex === result.length - 1) {
+        this.prevMonth = result[this.monthIndex - 1].name;
+      }
+      else {
+        this.nxtMonth = result[this.monthIndex + 1].name;
+        this.prevMonth = result[this.monthIndex - 1].name;
+      }
+    }
+    this.loader.isLoading.next(false);
   };
 }

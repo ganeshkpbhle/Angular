@@ -9,14 +9,14 @@ import { _LoginResponse, _UrlList, _UserInfo } from '../shared/data_layout';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userInfo: _UserInfo | undefined;
-  InProgress:boolean=false;
+  userInfo?: _UserInfo;
+  InProgress: boolean = false;
   constructor(private _apiservice: ApiService, public loader: LoaderService) {
-      loader.isLoading.subscribe(
-        (result:boolean)=>{
-          this.InProgress=result;
-        }
-      );
+    loader.isLoading.subscribe(
+      (result: boolean) => {
+        this.InProgress = result;
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -29,14 +29,14 @@ export class HomeComponent implements OnInit {
             this.userInfo = response;
             this._apiservice.setUserInfo(response);
             this._apiservice.getUrls(response.id)
-            .subscribe(
-              (response: Array<_UrlList>) => {
-                this._apiservice.setHistory(response);
-              },
-              (e) => {
-                console.log(e.error);
-              }
-            );
+              .subscribe(
+                (response1: Array<_UrlList>) => {
+                  this._apiservice.setHistory(response1);
+                },
+                (e) => {
+                  console.log(e.error);
+                }
+              );
           },
           (e) => {
             console.log(e.error);

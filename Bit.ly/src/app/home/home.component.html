@@ -3,7 +3,7 @@
         <div class="w-100">
             <app-nav [(user)]="userInfo"></app-nav>
         </div>
-        <div class='w-100' *ngIf="InProgress">
+        <div class='w-100' *ngIf="loader.isLoading|async">
             <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
         </div>
     </div>

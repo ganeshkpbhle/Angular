@@ -13,8 +13,8 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class DashboardComponent implements OnInit {
   form: FormGroup;
-  info: _UserInfo | undefined;
-  graphFeed: Array<_FeedPattn>=[];
+  info?: _UserInfo;
+  graphFeed: Array<_FeedPattn> = [];
   view: any = [650, 450];
 
   // options for Graph
@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor(private _apiservice: ApiService,public loader:LoaderService) {
+  constructor(private _apiservice: ApiService, public loader: LoaderService) {
     this.form = new FormGroup({
       url: new FormControl("", [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]),
       result: new FormControl("")
@@ -44,22 +44,37 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._apiservice.getUserInfo()
-      .subscribe((data: _UserInfo) => {
-        this.info = data;
-        this.loader.isLoading.next(false);
-        const payload: _UrlCompute = { Id: this.info.id, Opt: 1 };
-        this._apiservice.ComputeDate(payload)
-          .subscribe(
-            (response: Array<_ComputeResult>) => {
-              this.graphFeed.push({ name: 'active_cnt', series: response });
-            },
-            (e) => {
-              console.log(e.error);
-            }
-          );
-      });
-  }
+    this._apiservice.getUserInfo().subscribe(
+      (result: _UserInfo) => {
+        if(this.graphFeed.length===0 && !this.info){
+          this.onLoad(result);
+        }
+      },
+      (e) => {
+        console.log(e.error);
+      }
+    );
+    this._apiservice.UserInfoUpdated.subscribe(
+      (result: _UserInfo) => {
+        this.onLoad(result);
+      }
+    );
+  };
+  onLoad = (param: _UserInfo) => {
+    this.graphFeed = [];
+    this.info = param;
+    this.loader.isLoading.next(false);
+    const payload: _UrlCompute = { Id: this.info.id, Opt: 1 };
+    this._apiservice.ComputeDate(payload)
+      .subscribe(
+        (response: Array<_ComputeResult>) => {
+          this.graphFeed.push({ name: 'active_cnt', series: response });
+        },
+        (e) => {
+          console.log(e.error);
+        }
+      );
+  };
 
   RandGen = () => {
     let rslt = "";
@@ -85,13 +100,13 @@ export class DashboardComponent implements OnInit {
           (response: boolean) => {
             if (response) {
               this.form.patchValue({ result: `bit.ly/${payload.UrlId}` });
-              if(this.info){
+              if (this.info) {
                 this._apiservice.getUrls(this.info?.id)
-                .subscribe(
-                  (response1:Array<_UrlList>)=>{
-                    this._apiservice.setHistory(response1);
-                  }
-                );
+                  .subscribe(
+                    (response1: Array<_UrlList>) => {
+                      this._apiservice.setHistory(response1);
+                    }
+                  );
               }
             }
           },
