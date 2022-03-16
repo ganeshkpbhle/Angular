@@ -1,0 +1,2 @@
+<button (click)="login()" class="btn btn-primary mx-3" [disabled]="moralis_init&&!isLoggedIn">login</button>
+<button (click)="logOut()" class="btn btn-primary mx-3" [disabled]="!isLoggedIn">logout</button>
