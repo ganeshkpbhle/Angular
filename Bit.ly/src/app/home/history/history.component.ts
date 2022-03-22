@@ -10,7 +10,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  _history: Array<_UrlList>=[];
+  _history: Array<_UrlList> = [];
   graphFeed: Array<_ComputeResult> = [];
   // options for Pie
   gradient: boolean = true;
@@ -30,7 +30,7 @@ export class HistoryComponent implements OnInit {
     this._apiservice.getHistory()
       .subscribe(
         (result: Array<_UrlList>) => {
-          if(this._history.length===0 && this.graphFeed.length===0){
+          if (this._history.length === 0 && this.graphFeed.length === 0) {
             this.onLoad(result);
           }
         },
