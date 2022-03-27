@@ -7,8 +7,8 @@ import { Moralis } from 'moralis';
 })
 export class PageComponent implements OnInit {
 
-  readonly serverUrl: string = "https://8g9oweb09xcm.usemoralis.com:2053/server";
-  readonly appId: string = "vm4GZpDHc8Ugnx0iSJzjCwGyCzX2H1G1MufyUQmg";
+  readonly serverUrl: string = "https://175kcqyeek4u.usemoralis.com:2053/server";
+  readonly appId: string = "ZfqzBQLLAojOjUiza13NwHcKKdyWAWWCNWFQp4XF";
   user:string="";
   ethAddress?: string;
   ngOnInit(): void {
@@ -20,18 +20,6 @@ export class PageComponent implements OnInit {
             .then(
               () => {
                 console.log("Initialized");
-                const _user=new Moralis.Query("_User");
-                _user.equalTo("username",JSON.parse(this.user).username);
-                _user.find().then(
-                  (response1:any)=>{
-                    const params={id:response1[0]?.id};
-                    Moralis.Cloud.run("testFun",params).then(
-                      (result1:any)=>{
-                        console.log(result1[0]?.expiresAt);
-                      }
-                    );
-                  }
-                );
                 Moralis.isInitialized=true;
               }
             )
@@ -48,8 +36,6 @@ export class PageComponent implements OnInit {
       Moralis.authenticate()
         .then(
           (response: any) => {
-            console.log(response);
-            this.ethAddress = response.attributes['ethAddress'];
             this.user = JSON.stringify(response);
           }
         );
@@ -68,11 +54,6 @@ export class PageComponent implements OnInit {
     this.user = JSON.stringify(await Moralis.User.current());
   };
   objTest=()=>{
-    const LegendaryMonster = Moralis.Object.extend({
-      className: "Monster"
-    });
-    const monster:Moralis.Object = new LegendaryMonster();
-    monster.set('strength',1000);
-    monster.save();
+   console.log("In");
   };
 }
