@@ -1,0 +1,10 @@
+<mat-sidenav-container class="nav-container" cdkDropListGroup>
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" role="region">
+        <app-sidebar [entitiList]="newEntityList"></app-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content class="nav-button-container">
+        <button mat-icon-button color="accent" class="expand-btn" (click)="sidenav.toggle()">
+            <mat-icon>view_module</mat-icon>
+        </button>
+    </mat-sidenav-content>
+</mat-sidenav-container>
