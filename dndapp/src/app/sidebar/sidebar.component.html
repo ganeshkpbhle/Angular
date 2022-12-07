@@ -2,10 +2,10 @@
     <div class="flex-none h-14 ..." style="border-radius:5px;border-bottom:1px solid black;">
         <h1 class="font-serif pt-2 text-center">Product Entities</h1>
     </div>
-    <div class="grow h-14 ... flex-item p-4">
-        <ul class="entity-list mt-4" cdkDropList [cdkDropListData]="entitiList" (cdkDropListDropped)="drop($event)">
-            <li class="entity-list-item p-4 my-2" *ngFor="let entity of entitiList" [ngStyle]="{'background-color':entity.color}" cdkDrag>
-                <p class="font-serif text-2xl m-0 p-0" [ngStyle]="{'color':entity.fcolor}">{{entity.data.name}}</p>
+    <div class="grow h-14 ... flex-item">
+        <ul class="entity-list mt-4" cdkDropList [id]="'sidenav'" [cdkDropListData]="entitiList" (cdkDropListDropped)="Drop($event)">
+            <li class="entity-list-item py-1 px-2 my-5" *ngFor="let entity of entitiList" [ngStyle]="{'background-color':entity.color}" cdkDrag>
+                <p class="font-serif text-xl m-0 p-0" [ngStyle]="{'color':entity.fcolor}">{{entity.data.name}}</p>
             </li>
         </ul>
     </div>

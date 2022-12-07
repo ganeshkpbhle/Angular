@@ -1,6 +1,7 @@
-import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
-import { DraggableEntity, DraggableListItem } from '../shared/template';
+import { ShareddropService } from '../services/shareddrop.service';
+import { DraggableListItem } from '../shared/template';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,16 +9,16 @@ import { DraggableEntity, DraggableListItem } from '../shared/template';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  @Input() entitiList: Array<DraggableListItem> = [];
-  constructor() { }
+  entitiList: Array<DraggableListItem> = [];
+  constructor(private ss:ShareddropService) { }
 
   ngOnInit(): void {
+    this.entitiList=[...this.ss.newEntityList];
   }
-  drop=(event:CdkDragDrop<DraggableListItem[]>)=>{
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex);
+  Drop=(event:CdkDragDrop<DraggableListItem[]>)=>{
+    this.ss.drop(event);
+  }
+  public get droplists() : string[] {
+    return this.entitiList.map(e => e.data.id);
   }
 }
