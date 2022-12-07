@@ -28,11 +28,10 @@
         <div class="root">
           <div class="board">
             <div class="board-wrapper">
-              <div class="board-rows">
                 <div
                   cdkDragLockAxis="x"
                   class="board-row my-1"
-                  *ngFor="let row of droplists"
+                  *ngFor="let row of droplists;"
                 >
                   <ul
                     class="tasks-container"
@@ -42,7 +41,7 @@
                     (cdkDropListDropped)="Drop($event)"
                   >
                     <li
-                      [ngClass]="{'p-1 my-5':true,'entity-list-item':true}"
+                      [ngClass]="{'p-4 m-1':true,'entity-list-item':true}"
                       *ngFor="let entity of getlistbyId(row)"
                       [ngStyle]="{ 'background-color': entity.color }"
                       cdkDrag
@@ -56,7 +55,6 @@
                     </li>
                   </ul>
                 </div>
-              </div>
             </div>
           </div>
         </div>

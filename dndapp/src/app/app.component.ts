@@ -41,6 +41,9 @@ export class AppComponent {
     }
     return this.targetList[target_idex].dropItem;
   };
+  getEntbyId=(id:string):string|undefined=>{
+    return this.ss.newEntityList.find(e => e.data.id === id)?.data.name;
+  }
   public get droplists(): string[] {
     return this.ss.newEntityList.map((e) => e.data.id);
   }
