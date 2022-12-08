@@ -34,7 +34,7 @@
                   *ngFor="let row of droplists;"
                 >
                   <ul
-                    class="tasks-container"
+                    [ngClass]="getlistbyId(row).length===0?'tasks-container-before':'tasks-container-after'"
                     [id]="row"
                     cdkDropList
                     [cdkDropListData]="getlistbyId(row)"
