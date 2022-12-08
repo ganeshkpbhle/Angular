@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   constructor(private ss:ShareddropService) { }
 
   ngOnInit(): void {
-    this.entitiList=[...this.ss.newEntityList];
+    this.entitiList=[...ShareddropService.newEntityList];
   }
   Drop=(event:CdkDragDrop<DraggableListItem[]>)=>{
     this.ss.drop(event);

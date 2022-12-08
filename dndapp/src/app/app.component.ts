@@ -1,7 +1,5 @@
 import {
   CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ShareddropService } from './services/shareddrop.service';
@@ -9,7 +7,7 @@ import {
   Board,
   Column,
   DraggableListItem,
-  DropListItems,
+  DropListItem,
 } from './shared/template';
 
 @Component({
@@ -19,32 +17,4 @@ import {
 })
 export class AppComponent {
   title = 'Visualizer';
-  opened: boolean = true;
-  constructor(private ss: ShareddropService) {
-    this.targetList = ss.newEntityList.map((obj) => {
-      return { target_id: obj.data.id, dropItem: [] };
-    });
-  }
-  targetList: Array<DropListItems> = [];
-  Drop(event: CdkDragDrop<DraggableListItem[]>): void {
-    this.ss.drop(event);
-  }
-  getlistbyId = (id: string): DraggableListItem[] => {
-    var target_idex: number = this.targetList.findIndex(
-      (e) => e.target_id === id
-    );
-    if (!this.targetList[target_idex]?.dropItem) {
-      this.targetList[target_idex] = {
-        target_id: id,
-        dropItem: [],
-      };
-    }
-    return this.targetList[target_idex].dropItem;
-  };
-  getEntbyId=(id:string):string|undefined=>{
-    return this.ss.newEntityList.find(e => e.data.id === id)?.data.name;
-  }
-  public get droplists(): string[] {
-    return this.ss.newEntityList.map((e) => e.data.id);
-  }
 }

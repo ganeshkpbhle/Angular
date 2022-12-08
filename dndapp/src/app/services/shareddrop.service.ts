@@ -5,13 +5,13 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
-import { DraggableListItem } from '../shared/template';
+import { DraggableListItem, DropListItem } from '../shared/template';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShareddropService {
-  public readonly newEntityList: Array<DraggableListItem> = [
+  public static readonly newEntityList: Array<DraggableListItem> = [
     {
       data: {
         id: 'pdt',

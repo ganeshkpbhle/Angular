@@ -1,64 +1,19 @@
-<mat-toolbar class="nav-tool-bar">
-  <mat-toolbar-row>
-    <div class="flex flex-row ... toolbar-items">
-      <div>
-        <p class="text-2xl pt-5 font-serif">{{ title }}</p>
-      </div>
-      <div>
-        <mat-nav-list class="my-nav-list">
-          <a mat-list-item>Create-Product</a>
-          <a mat-list-item>Edit-Product</a>
-        </mat-nav-list>
-      </div>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-<section cdkDropListGroup class="drop-list-wrapper">
-  <mat-sidenav-container class="nav-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" role="region">
-      <app-sidebar></app-sidebar>
-    </mat-sidenav>
-    <mat-sidenav-content class="nav-button-container">
-      <div class="flex flex-row ... items-center nav-page">
-        <div class="expand-btn">
-          <button mat-icon-button color="accent" (click)="sidenav.toggle()">
-            <mat-icon>view_module</mat-icon>
-          </button>
+<div class="flex flex-col ..." style="height:100%;width:100%;">
+  <mat-toolbar class="nav-tool-bar">
+    <mat-toolbar-row>
+      <div class="flex flex-row ... toolbar-items">
+        <div>
+          <p class="text-2xl pt-5 font-serif">{{ title }}</p>
         </div>
-        <div class="root">
-          <div class="board">
-            <div class="board-wrapper">
-                <div
-                  cdkDragLockAxis="x"
-                  class="board-row my-1"
-                  *ngFor="let row of droplists;"
-                >
-                  <ul
-                    [ngClass]="getlistbyId(row).length===0?'tasks-container-before':'tasks-container-after'"
-                    [id]="row"
-                    cdkDropList
-                    [cdkDropListData]="getlistbyId(row)"
-                    (cdkDropListDropped)="Drop($event)"
-                  >
-                    <li
-                      [ngClass]="{'p-4 m-1':true,'entity-list-item':true}"
-                      *ngFor="let entity of getlistbyId(row)"
-                      [ngStyle]="{ 'background-color': entity.color }"
-                      cdkDrag
-                    >
-                      <p
-                        class="font-serif text-xl m-0 p-0"
-                        [ngStyle]="{ color: entity.fcolor }"
-                      >
-                        {{ entity.data.name }}
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-            </div>
-          </div>
+        <div>
+          <mat-nav-list class="my-nav-list">
+            <a mat-list-item [routerLink]="'/create'">Create-Product</a>
+            <a mat-list-item [routerLink]="'/edit'">Edit-Product</a>
+          </mat-nav-list>
         </div>
       </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</section>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>
+

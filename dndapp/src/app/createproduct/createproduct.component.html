@@ -1,0 +1,49 @@
+<section cdkDropListGroup class="drop-list-wrapper">
+    <mat-sidenav-container class="nav-container">
+      <mat-sidenav #sidenav mode="side" [(opened)]="opened" role="region">
+        <app-sidebar></app-sidebar>
+      </mat-sidenav>
+      <mat-sidenav-content class="nav-button-container">
+        <div class="flex flex-row ... items-center nav-page">
+          <div class="expand-btn">
+            <button mat-icon-button color="accent" (click)="sidenav.toggle()">
+              <mat-icon>view_module</mat-icon>
+            </button>
+          </div>
+          <div class="root">
+            <div class="board">
+              <div class="board-wrapper">
+                  <div
+                    cdkDragLockAxis="x"
+                    class="board-row my-1"
+                    *ngFor="let row of droplists;"
+                  >
+                    <!-- <ul
+                      [ngClass]="getlistbyId(row).length===0?'tasks-container-before':'tasks-container-after'"
+                      [id]="row"
+                      cdkDropList
+                      [cdkDropListData]="getlistbyId(row)"
+                      (cdkDropListDropped)="Drop($event)"
+                    >
+                      <li
+                        [ngClass]="{'p-4 m-1':true,'entity-list-item':true}"
+                        *ngFor="let entity of getlistbyId(row)"
+                        [ngStyle]="{ 'background-color': entity.color }"
+                        cdkDrag
+                      >
+                        <p
+                          class="font-serif text-xl m-0 p-0"
+                          [ngStyle]="{ color: entity.fcolor }"
+                        >
+                          {{ entity.data.name }}
+                        </p>
+                      </li>
+                    </ul> -->
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </section>

@@ -7,7 +7,7 @@ export interface DraggableListItem {
   color: string;
   fcolor: string;
 }
-export interface DropListItems{
+export interface DropListItem{
   target_id:string;
   dropItem:DraggableListItem[];
 }
