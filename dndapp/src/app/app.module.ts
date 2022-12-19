@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './materials/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CreateproductComponent } from './createproduct/createproduct.component';
 import { HeaderComponent } from './header/header.component';
 import { ShareddropService } from './services/shareddrop.service';
 import { EditproductComponent } from './editproduct/editproduct.component';
+import { EntityDialogComponent } from './Dialog/entity-dialog/entity-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +19,16 @@ import { EditproductComponent } from './editproduct/editproduct.component';
     SidebarComponent,
     CreateproductComponent,
     HeaderComponent,
-    EditproductComponent
+    EditproductComponent,
+    EntityDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ShareddropService],
   bootstrap: [AppComponent],

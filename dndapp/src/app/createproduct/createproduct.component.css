@@ -82,6 +82,8 @@
     border-radius: 6px;
     max-height: fit-content;
     cursor: pointer;
+    min-width:fit-content;
+    flex-basis: 28%;
   }
   .drop-list-wrapper{
     width: 100%;
@@ -108,5 +110,11 @@
     max-height:max-content;
     justify-content:space-evenly;
     flex-wrap: wrap;
-    max-width: 600px;
+    max-width: fit-content;
+  }
+  .button-combo-cont{
+    display:inline-flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
   }

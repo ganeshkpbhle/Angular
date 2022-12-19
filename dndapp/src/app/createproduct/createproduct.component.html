@@ -1,49 +1,69 @@
 <section cdkDropListGroup class="drop-list-wrapper">
-    <mat-sidenav-container class="nav-container">
-      <mat-sidenav #sidenav mode="side" [(opened)]="opened" role="region">
-        <app-sidebar></app-sidebar>
-      </mat-sidenav>
-      <mat-sidenav-content class="nav-button-container">
-        <div class="flex flex-row ... items-center nav-page">
-          <div class="expand-btn">
-            <button mat-icon-button color="accent" (click)="sidenav.toggle()">
-              <mat-icon>view_module</mat-icon>
-            </button>
-          </div>
-          <div class="root">
-            <div class="board">
-              <div class="board-wrapper">
-                  <div
-                    cdkDragLockAxis="x"
-                    class="board-row my-1"
-                    *ngFor="let row of droplists;"
+  <mat-sidenav-container class="nav-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" role="region">
+      <app-sidebar></app-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content class="nav-button-container">
+      <div class="flex flex-row ... items-center nav-page">
+        <div class="expand-btn">
+          <button mat-icon-button color="accent" (click)="sidenav.toggle()">
+            <mat-icon>view_module</mat-icon>
+          </button>
+        </div>
+        <div class="root">
+          <div class="board">
+            <div class="board-wrapper">
+              <div
+                cdkDragLockAxis="x"
+                class="board-row my-1"
+                *ngFor="let row of droplists"
+              >
+                <ul
+                  [ngClass]="
+                    getlistbyId(row).length === 0
+                      ? 'tasks-container-before'
+                      : 'tasks-container-after'
+                  "
+                  [id]="row"
+                  cdkDropList
+                  [cdkDropListData]="getlistbyId(row)"
+                  (cdkDropListDropped)="Drop($event)"
+                >
+                  <li
+                    [ngClass]="{ 'p-3 m-1': true, 'entity-list-item': true }"
+                    *ngFor="let entity of getlistbyId(row);let i = index;"
+                    [ngStyle]="{ 'background-color': entity.color }"
+                    cdkDrag
                   >
-                    <ul
-                      [ngClass]="getlistbyId(row).length===0?'tasks-container-before':'tasks-container-after'"
-                      [id]="row"
-                      cdkDropList
-                      [cdkDropListData]="getlistbyId(row)"
-                      (cdkDropListDropped)="Drop($event)"
-                    >
-                      <li
-                        [ngClass]="{'p-4 m-1':true,'entity-list-item':true}"
-                        *ngFor="let entity of getlistbyId(row)"
-                        [ngStyle]="{ 'background-color': entity.color }"
-                        cdkDrag
+                    <div class="button-combo-cont">
+                      <p
+                        class="font-serif text-xl p-0"
+                        [ngStyle]="{ color: entity.fcolor }"
                       >
-                        <p
-                          class="font-serif text-xl m-0 p-0"
-                          [ngStyle]="{ color: entity.fcolor }"
-                        >
-                          {{ entity.data.name }}
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
+                        {{ entity.data.name + i}}
+                      </p>
+                      <button
+                        fxFlex="80"
+                        mat-icon-button
+                        matTooltip="Options"
+                        [matMenuTriggerFor]="optionsMenu"
+                        class="hover-display"
+                        *ngIf="!['pdt'].includes(row)"
+                      >
+                        <mat-icon>more_vert</mat-icon>
+                      </button> 
+                      <mat-menu #optionsMenu="matMenu" [overlapTrigger]="false">
+                        <button mat-menu-item>Edit</button>
+                        <button mat-menu-item (click)="removeEnt(i,row)">Delete</button>
+                      </mat-menu>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </section>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</section>

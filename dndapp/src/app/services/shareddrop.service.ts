@@ -5,8 +5,10 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
-import { DraggableListItem, DropListItem } from '../shared/template';
-
+import { DraggableListItem } from '../shared/template';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { EntityDialogComponent } from '../Dialog/entity-dialog/entity-dialog.component';
+import { Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,6 +21,16 @@ export class ShareddropService {
       },
       color: 'rgb(1, 239, 96)',
       fcolor: 'black',
+      desc:[
+        {
+          type:'input',
+          key:'pdtClass',
+          label:"ProductClass",
+          defaultValue:"",
+          validators:[Validators.required],
+          required:true
+        }
+      ]
     },
     {
       data: {
@@ -27,6 +39,7 @@ export class ShareddropService {
       },
       color: 'rgb(1, 239, 206)',
       fcolor: 'black',
+      desc:[]
     },
     {
       data: {
@@ -35,6 +48,7 @@ export class ShareddropService {
       },
       color: 'rgb(255, 214, 134)',
       fcolor: 'black',
+      desc:[]
     },
     {
       data: {
@@ -42,7 +56,7 @@ export class ShareddropService {
         name: 'Benefit-Rating-Factor',
       },
       color: 'rgb(95,0,0)',
-      fcolor: 'white',
+      fcolor: 'white',desc:[]
     },
     {
       data: {
@@ -50,7 +64,7 @@ export class ShareddropService {
         name: 'Schedule-of-Benefits',
       },
       color: 'rgb(196,20,100)',
-      fcolor: 'white',
+      fcolor: 'white',desc:[]
     },
     {
       data: {
@@ -58,7 +72,7 @@ export class ShareddropService {
         name: 'Coverages',
       },
       color: 'rgb(255, 232, 105)',
-      fcolor: 'black',
+      fcolor: 'black',desc:[]
     },
     {
       data: {
@@ -66,7 +80,7 @@ export class ShareddropService {
         name: 'Rates',
       },
       color: 'indigo',
-      fcolor: 'white',
+      fcolor: 'white',desc:[]
     },
     {
       data: {
@@ -74,7 +88,7 @@ export class ShareddropService {
         name: 'Premiums',
       },
       color: 'red',
-      fcolor: 'white',
+      fcolor: 'white',desc:[]
     },
     {
       data: {
@@ -82,7 +96,7 @@ export class ShareddropService {
         name: 'Product Document',
       },
       color: 'rgb(0, 255,168)',
-      fcolor: 'black',
+      fcolor: 'black',desc:[]
     },
     {
       data: {
@@ -90,7 +104,7 @@ export class ShareddropService {
         name: 'Limits',
       },
       color: 'olive',
-      fcolor: 'black',
+      fcolor: 'black',desc:[]
     },
     {
       data: {
@@ -98,7 +112,7 @@ export class ShareddropService {
         name: 'Deductibles',
       },
       color: '#ff6347',
-      fcolor: 'white',
+      fcolor: 'white',desc:[]
     },
     {
       data: {
@@ -106,14 +120,23 @@ export class ShareddropService {
         name: 'Exclusion',
       },
       color: 'brown',
-      fcolor: 'white',
+      fcolor: 'white',desc:[]
     },
   ];
   public readonly snlevalIds: string[] = ['pdt'];
-  constructor() {}
+  constructor(private dialog:MatDialog) {
+    const dialogRef = this.dialog.open(EntityDialogComponent, {
+      data: {desc:ShareddropService.newEntityList[0].desc},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
   drop(event: CdkDragDrop<DraggableListItem[]>): void {
     var tgt_sidenav: boolean = event.container.id === 'sidenav';
-    if (event.container.id === event.previousContainer.id) {
+    if (event.container.id === event.previousContainer.id && !tgt_sidenav) {
+      console.log(event);
       moveItemInArray(
         event.container.data,
         event.previousIndex,
@@ -136,12 +159,13 @@ export class ShareddropService {
           event.previousIndex,
           event.currentIndex
         );
+        //code to open dialog
       } else {
         if (
           tgt_sidenav &&
           event.container.data.findIndex(
             (e) => e.data.id == event.previousContainer.id
-          )!=-1
+          ) != -1
         ) {
           return;
         }
@@ -151,8 +175,11 @@ export class ShareddropService {
           event.previousIndex,
           event.currentIndex
         );
+        if(!tgt_sidenav){
+          //code to open dialog
+        }
       }
-      return;
     }
+
   }
 }

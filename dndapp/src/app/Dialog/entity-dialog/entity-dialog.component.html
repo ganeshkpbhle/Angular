@@ -1,0 +1,12 @@
+<div class="flex flex-column ... align-center justify-center">
+  <div *ngFor="let ctrl of data.desc" [formGroup]="dlgGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ctrl.label}}</mat-label>
+      <div ngSwitch ={{ctrl.type}}>
+        <div *ngSwitchCase="'input'">
+            <input matInput formControlName={{ctrl.key}/>
+        </div>
+      </div>
+    </mat-form-field>
+  </div>
+</div>
