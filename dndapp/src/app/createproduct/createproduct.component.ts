@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ShareddropService } from '../services/shareddrop.service';
 import { DraggableListItem, DropListItem } from '../shared/template';
-import { State } from '../store/models/state.model';
 
 @Component({
   selector: 'app-createproduct',
@@ -13,22 +12,23 @@ import { State } from '../store/models/state.model';
 })
 export class CreateproductComponent implements OnInit {
   opened: boolean = true;
-  constructor(private ss: ShareddropService,private store:Store<State>) {
-    this.targetList$=this.store.select((store)=> store.targetList);
-    console.log(this.targetList$);
+  constructor(private ss: ShareddropService) {
+    this.targetList$=ShareddropService.newEntityList.map((obj) => {
+      return { target_id: obj.data.id, dropItem: [] };
+    });
   }
-  targetList$: Observable<Array<DropListItem>>;
+  targetList$: Array<DropListItem>;
   ngOnInit(): void {
   }
   Drop(event: CdkDragDrop<DraggableListItem[]>): void {
     this.ss.drop(event);
   }
-  // getlistbyId = (id: string): DraggableListItem[] => {
-  //   var target_idex: number = this.targetList$.forEach(e => e.).findIndex(
-  //     (e) => e.target_id === id
-  //   );
-  //   return this.targetList[target_idex].dropItem;
-  // };
+  getlistbyId = (id: string): DraggableListItem[] => {
+    var target_idex: number = this.targetList$.findIndex(
+      (e) => e.target_id === id
+    );
+    return this.targetList$[target_idex].dropItem;
+  };
   getEntbyId=(id:string):string|undefined=>{
     return ShareddropService.newEntityList.find(e => e.data.id === id)?.data.name;
   }

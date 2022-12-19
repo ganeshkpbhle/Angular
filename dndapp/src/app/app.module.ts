@@ -11,8 +11,6 @@ import { CreateproductComponent } from './createproduct/createproduct.component'
 import { HeaderComponent } from './header/header.component';
 import { ShareddropService } from './services/shareddrop.service';
 import { EditproductComponent } from './editproduct/editproduct.component';
-import { StoreModule } from '@ngrx/store';
-import { TargetListReducer } from './store/reducers/targetlist.reducer';
 
 @NgModule({
   declarations: [
@@ -27,10 +25,7 @@ import { TargetListReducer } from './store/reducers/targetlist.reducer';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule, 
-    StoreModule.forRoot({
-      tgtdplist: TargetListReducer,
-    })
+    FormsModule
   ],
   providers: [ShareddropService],
   bootstrap: [AppComponent],
