@@ -1,12 +1,29 @@
-<div class="flex flex-column ... align-center justify-center">
-  <div *ngFor="let ctrl of data.desc" [formGroup]="dlgGroup">
-    <mat-form-field appearance="fill">
-      <mat-label>{{ctrl.label}}</mat-label>
-      <div ngSwitch ={{ctrl.type}}>
-        <div *ngSwitchCase="'input'">
-            <input matInput formControlName={{ctrl.key}/>
-        </div>
+<div class="flex flex-col ... justify-center">
+  <button mat-icon-button color="primary" style="margin-left: auto;" [disabled]="formgrp['invlaid']" (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <form #formgrp class="flex flex-col ... align-center justify-center" [formGroup]="dlgGroup" (ngSubmit)="submit()">
+    <div *ngFor="let ctrl of data.desc">
+      <div [ngSwitch]="ctrl.type">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ ctrl.label }}</mat-label>
+          <div *ngSwitchCase="'input'">
+            <input matInput formControlName="{{ ctrl.key }}" />
+          </div>
+          <div *ngSwitchCase="'select'">
+            <mat-select [formControlName]="ctrl.key">
+              <mat-option
+                *ngFor="let item of select_options(ctrl.key); let j = index"
+                [value]="j"
+              >
+                {{ item }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </mat-form-field>
       </div>
-    </mat-form-field>
-  </div>
+    </div>
+    <button mat-raised-button color="primary" [type]="'submit'" [disabled]="dlgGroup.invalid">Save</button>
+  </form>
 </div>
+

@@ -118,3 +118,7 @@
     align-items: baseline;
     justify-content: space-between;
   }
+  .icon-button{
+    margin-left: 20px;
+    background-color: transparent;
+  }

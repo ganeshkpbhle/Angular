@@ -19,6 +19,6 @@ export class SidebarComponent implements OnInit {
     this.ss.drop(event);
   }
   public get droplists() : string[] {
-    return this.entitiList.map(e => e.data.id);
+    return this.entitiList.map(e => e.meta_data.id);
   }
 }

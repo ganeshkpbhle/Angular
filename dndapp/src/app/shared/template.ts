@@ -5,10 +5,11 @@ export interface DraggableEntity {
   name: string;
 }
 export interface DraggableListItem {
-  data: DraggableEntity;
+  meta_data: DraggableEntity;
   color: string;
   fcolor: string;
-  desc:FormDesc
+  meta_index:number;
+  desc:FormDesc;
 }
 export interface DropListItem{
   target_id:string;

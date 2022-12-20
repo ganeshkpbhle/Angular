@@ -5,7 +5,7 @@
     <div class="grow h-14 ... flex-item">
         <ul class="entity-list mt-4" cdkDropList [id]="'sidenav'" [cdkDropListData]="entitiList" (cdkDropListDropped)="Drop($event)">
             <li class="entity-list-item py-1 px-2 my-5" *ngFor="let entity of entitiList" [ngStyle]="{'background-color':entity.color}" cdkDrag>
-                <p class="font-serif text-xl m-0 p-0" [ngStyle]="{'color':entity.fcolor}">{{entity.data.name}}</p>
+                <p class="font-serif text-xl m-0 p-0" [ngStyle]="{'color':entity.fcolor}">{{entity.meta_data.name}}</p>
             </li>
         </ul>
     </div>

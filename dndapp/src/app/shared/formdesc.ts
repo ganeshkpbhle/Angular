@@ -1,21 +1,22 @@
 import { ValidatorFn } from "@angular/forms";
 
-type InputControl = {
+export type InputControl = {
     type: 'input',
     key: string,
     label:string,
-    defaultValue?: string,
     validators:ValidatorFn[],
-    required:boolean
+    required:boolean,
+    value:string
  }
- type SelectControl = {
+ export type SelectControl = {
     type: 'select',
     key: string,
     label:string,
     options: string[],
-    defaultOption?: string,
     validators:ValidatorFn[],
-    required:boolean
+    required:boolean,
+    option:number
  }
- type GenericControl = InputControl | SelectControl;
+
+ export type GenericControl = InputControl | SelectControl;
  export type FormDesc = GenericControl[];
