@@ -31,37 +31,46 @@
                 >
                   <li
                     [ngClass]="{ 'p-3 m-1': true, 'entity-list-item': true }"
-                    *ngFor="let entity of getlistbyId(row);let i = index;"
+                    *ngFor="let entity of getlistbyId(row); let i = index"
                     [ngStyle]="{ 'background-color': entity.color }"
                     cdkDrag
                   >
-                    <div class="button-combo-cont">
-                      <p
-                        class="font-serif text-xl p-0"
-                        [ngStyle]="{ color: entity.fcolor }"
-                      >
-                        {{ getMetaInfo(entity,i) }}
-                      </p>
-                      <div *ngIf="!['pdt'].includes(row); else editonly">
-                        <button
-                        fxFlex="80"
-                        mat-mini-fab
-                        matTooltip="Options"
-                        [matMenuTriggerFor]="optionsMenu"
-                        class="icon-button"
-                      >
-                        <mat-icon>more_vert</mat-icon>
-                      </button> 
+                    <div class="inner-flex">
+                      <div class="button-combo-cont">
+                        <p
+                          class="font-serif text-xl p-0"
+                          [ngStyle]="{ color: entity.fcolor }"
+                        >
+                          {{ entity.name }}
+                        </p>
+                        <div style="margin-left: auto;">
+                          <button
+                            fxFlex="80"
+                            mat-mini-fab
+                            matTooltip="Options"
+                            [matMenuTriggerFor]="optionsMenu"
+                            class="icon-button"
+                          >
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                        </div>
+                        <mat-menu
+                          #optionsMenu="matMenu"
+                          [overlapTrigger]="false"
+                        >
+                          <button mat-menu-item (click)="editEnt(row, i)">
+                            Edit
+                          </button>
+                          <button mat-menu-item (click)="removeEnt(i, row)">
+                            Delete
+                          </button>
+                        </mat-menu>
                       </div>
-                      <ng-template #editonly>
-                        <button mat-mini-fab [ngClass]="{'icon-button':true}" (click)="editEnt(row,i)">
-                          <mat-icon>edit</mat-icon>
-                        </button>
-                      </ng-template>
-                      <mat-menu #optionsMenu="matMenu" [overlapTrigger]="false">
-                        <button mat-menu-item (click)="editEnt(row,i)">Edit</button>
-                        <button mat-menu-item (click)="removeEnt(i,row)">Delete</button>
-                      </mat-menu>
+                      <ul class="inner-sub-list">
+                        <li *ngFor="let item of getInnerMetaInfo(entity)" [ngClass]="{ 'p-3 m-1': true, 'entity-inner-list-item font-serif': true }" [ngStyle]="{ 'background-color': entity.color }">
+                        {{item}}  
+                        </li>
+                      </ul>
                     </div>
                   </li>
                 </ul>

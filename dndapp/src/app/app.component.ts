@@ -1,14 +1,4 @@
-import {
-  CdkDragDrop,
-} from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
-import { ShareddropService } from './services/shareddrop.service';
-import {
-  Board,
-  Column,
-  DraggableListItem,
-  DropListItem,
-} from './shared/template';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',

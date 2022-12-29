@@ -1,23 +1,24 @@
-import { FormDesc } from "./formdesc";
+import { Control_Key_Desc, FormDesc } from "./formdesc";
 
-export interface DraggableEntity {
-  id: string;
-  name: string;
+export type ContainerId = 'pdt'|'ins'|'premrf'|'benrf'|'sob'|'cov'|'rates'|'prem'|'pdct'|'lmt'|'dedct'|'excl'
+export type DraggableEntity ={
+  
 }
-export interface DraggableListItem {
-  meta_data: DraggableEntity;
+export type DraggableListItem ={
+  id: ContainerId;
+  name: string;
   color: string;
   fcolor: string;
-  meta_index:number;
-  desc:FormDesc;
+  meta_ctrl:Control_Key_Desc;
+  desc:Array<FormDesc>
 }
-export interface DropListItem{
+export type DropListItem ={
   target_id:string;
   dropItem:DraggableListItem[];
 }
-export class Column {
-  constructor(public name: string, public id: string, public tasks: string[]) {}
-}
-export class Board {
-  constructor(public name: string, public columns: Column[]) {}
+
+export type DialogInput={
+  cont_name:string;
+  cont_id: ContainerId;
+  form_desc: Array<FormDesc>
 }

@@ -12,6 +12,8 @@ import { HeaderComponent } from './header/header.component';
 import { ShareddropService } from './services/shareddrop.service';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { EntityDialogComponent } from './Dialog/entity-dialog/entity-dialog.component';
+import { MatFormField } from '@angular/material/form-field';
+import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { EntityDialogComponent } from './Dialog/entity-dialog/entity-dialog.comp
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng5SliderModule
   ],
   providers: [ShareddropService],
   bootstrap: [AppComponent],

@@ -11,14 +11,13 @@ import { DraggableListItem } from '../shared/template';
 export class SidebarComponent implements OnInit {
   entitiList: Array<DraggableListItem> = [];
   constructor(private ss:ShareddropService) { }
-
   ngOnInit(): void {
     this.entitiList=[...ShareddropService.newEntityList];
   }
   Drop=(event:CdkDragDrop<DraggableListItem[]>)=>{
-    this.ss.drop(event);
+    this.ss.drop(event,[]);
   }
   public get droplists() : string[] {
-    return this.entitiList.map(e => e.meta_data.id);
+    return this.entitiList.map(e => e.id);
   }
 }
