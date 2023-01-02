@@ -20,18 +20,18 @@
               >
                 <ul
                   [ngClass]="
-                    getlistbyId(row).length === 0
+                    (row | droplists : targetList$).length === 0
                       ? 'tasks-container-before'
                       : 'tasks-container-after'
                   "
                   [id]="row"
                   cdkDropList
-                  [cdkDropListData]="getlistbyId(row)"
+                  [cdkDropListData]="row | droplists : targetList$"
                   (cdkDropListDropped)="Drop($event)"
                 >
                   <li
                     [ngClass]="{ 'p-3 m-1': true, 'entity-list-item': true }"
-                    *ngFor="let entity of getlistbyId(row); let i = index"
+                    *ngFor="let entity of (row | droplists:targetList$); let i = index"
                     [ngStyle]="{ 'background-color': entity.color }"
                     cdkDrag
                   >
@@ -43,7 +43,7 @@
                         >
                           {{ entity.name }}
                         </p>
-                        <div style="margin-left: auto;">
+                        <div style="margin-left: auto">
                           <button
                             fxFlex="80"
                             mat-mini-fab
@@ -67,8 +67,15 @@
                         </mat-menu>
                       </div>
                       <ul class="inner-sub-list">
-                        <li *ngFor="let item of getInnerMetaInfo(entity)" [ngClass]="{ 'p-3 m-1': true, 'entity-inner-list-item font-serif': true }" [ngStyle]="{ 'background-color': entity.color }">
-                        {{item}}  
+                        <li
+                          *ngFor="let item of (entity.desc|metainfo:entity.id:entity.meta_ctrl)"
+                          [ngClass]="{
+                            'p-3 m-1': true,
+                            'entity-inner-list-item font-serif': true
+                          }"
+                          [ngStyle]="{ 'background-color': entity.color }"
+                        >
+                          {{ item }}
                         </li>
                       </ul>
                     </div>

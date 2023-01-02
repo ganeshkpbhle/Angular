@@ -15,42 +15,56 @@
     [formGroup]="dlgGroup"
     (ngSubmit)="submit()"
   >
-    <div *ngFor="let row of desc_copy; let r = index" class="control-flex-row">
-      <div *ngFor="let ctrl of row;">
+    <div
+      class="flex flex-row ... justify-evenly"
+      *ngFor="let row of desc_copy; let r = index"
+    >
+      <div
+        *ngFor="let ctrl of row"
+        class="flex flex-col ... justify-start"
+        style="max-height: fit-content"
+      >
         <div [ngSwitch]="ctrl.type">
           <div *ngSwitchCase="'input'">
-            <div *ngIf="input_list(ctrl.key); let inputs">
-              <ul
-                class="p-5 my-4"
-                [ngClass]="inputs.list.length > 1 ? inputs.class : ''"
-                *ngIf="inputs.list.length > 0"
-              >
-                <div *ngIf="inputs.list.length > 1" class="grp-head-text">
-                  {{ ctrl.key }}
+            <ng-container *ngIf="(ctrl.key|inputopt:desc_copy); let inputs">
+              <div>
+                <div *ngIf="inputs.list.length > 0">
+                  <div>
+                    <ul
+                      class="p-5 my-4"
+                      [ngClass]="inputs.list.length > 1 ? inputs.class : ''"
+                    >
+                      <ng-container *ngIf="inputs.list.length > 1">
+                        <div class="grp-head-text">
+                          {{ ctrl.key }}
+                        </div>
+                      </ng-container>
+                      <li
+                        [formArrayName]="ctrl.key"
+                        *ngFor="let input of inputs.list; let i = index"
+                        class="m-1"
+                      >
+                        <mat-form-field appearance="fill">
+                          <mat-label>{{ input.label }}</mat-label>
+                          <input
+                            matInput
+                            formControlName="{{ i }}"
+                            [type]="input.type"
+                          />
+                        </mat-form-field>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <li
-                  [formArrayName]="ctrl.key"
-                  *ngFor="let input of inputs.list; let i = index"
-                  class="m-1"
-                >
-                  <mat-form-field appearance="fill">
-                    <mat-label>{{ input.label }}</mat-label>
-                    <input
-                      matInput
-                      formControlName="{{ i }}"
-                      [type]="input.type"
-                    />
-                  </mat-form-field>
-                </li>
-              </ul>
-            </div>
+              </div>
+            </ng-container>
           </div>
           <div *ngSwitchCase="'select'">
             <mat-form-field appearance="fill">
               <mat-label>{{ ctrl.label }}</mat-label>
               <mat-select [formControlName]="ctrl.key">
                 <mat-option
-                  *ngFor="let item of select_options(ctrl.key); let j = index"
+                  *ngFor="let item of (ctrl.key|selectopt:desc_copy); let j = index"
                   [value]="j"
                 >
                   {{ item }}
@@ -59,63 +73,229 @@
             </mat-form-field>
           </div>
           <div *ngSwitchCase="'check'">
-            <ul
-              *ngIf="checkbox_list(ctrl.key); let check_boxes"
-              class="p-5 my-4"
-              [ngClass]="check_boxes.class"
-            >
-              <li
-                [formArrayName]="ctrl.key"
-                *ngFor="let check_box of check_boxes.list; let i = index"
-                class="m-1"
-              >
-                <mat-checkbox
-                  [formControlName]="i"
-                  [color]="'accent'"
-                  (change)="onCheckChange(r,ctrl.key)"
+            <ng-container *ngIf="(ctrl.key|checkopt:desc_copy); let check_boxes">
+              <ul [ngClass]="check_boxes.class">
+                <li
+                  [formArrayName]="ctrl.key"
+                  *ngFor="let check_box of check_boxes.list; let i = index"
+                  class="m-1"
                 >
-                  {{ check_box.id }}
-                </mat-checkbox>
-              </li>
-            </ul>
+                  <mat-checkbox
+                    [formControlName]="i"
+                    [color]="'accent'"
+                    (change)="onCheckChange(r, ctrl.key)"
+                  >
+                    {{ check_box.id }}
+                  </mat-checkbox>
+                </li>
+              </ul>
+            </ng-container>
           </div>
           <div *ngSwitchCase="'radio'">
-            <div *ngIf="radio_list(ctrl.key); let radio_grps">
-              <mat-radio-group
-                [formControlName]="ctrl.key"
-                class="p-5 my-4"
-                [ngClass]="radio_grps.class"
-              >
-                <mat-radio-button
-                  *ngFor="
-                    let option of radio_grps.radio_grp.options;
-                    let i = index
-                  "
-                  class="m-1 font-serif"
-                  [value]="i"
-                  >{{ option }}</mat-radio-button
+            <ng-container *ngIf="(ctrl.key|radopt:desc_copy); let radio_grps">
+              <div>
+                <mat-radio-group
+                  [formControlName]="ctrl.key"
+                  class="p-5 my-4"
+                  [ngClass]="radio_grps.class"
                 >
-              </mat-radio-group>
+                  <mat-radio-button
+                    *ngFor="
+                      let option of radio_grps.radio_grp.options;
+                      let i = index
+                    "
+                    class="m-1 font-serif"
+                    [value]="i"
+                    >{{ option }}</mat-radio-button
+                  >
+                </mat-radio-group>
+              </div>
+            </ng-container>
+          </div>
+          <div *ngSwitchCase="'range-slider'">
+            <div>
+              <ng-container *ngIf="(ctrl|sliderdesc:desc_copy); let slider">
+                <ng5-slider
+                  [formControlName]="slider.key"
+                  [options]="{
+                    floor: slider.min,
+                    ceil: slider.max,
+                    hideLimitLabels: false,
+                    hidePointerLabels: false
+                  }"
+                ></ng5-slider>
+              </ng-container>
             </div>
           </div>
           <div *ngSwitchCase="'slider'">
-            <div *ngIf="getSliderCtrlDesc(ctrl.key); let slider">
-              <ng5-slider
-                [formControlName]="slider.key"
-                [options]="{
-                  floor: slider.min,
-                  ceil: slider.max,
-                  hideLimitLabels: false,
-                  hidePointerLabels: false
-                }"
-                (userChange)="writeSliderChange($event, ctrl.key, r)"
-              ></ng5-slider>
+            <div>
+              <ng-container *ngIf="(ctrl|sliderdesc:desc_copy); let slider">
+                <ng5-slider
+                  [formControlName]="slider.key"
+                  [options]="{
+                    floor: slider.min,
+                    ceil: slider.max,
+                    hideLimitLabels: false,
+                    hidePointerLabels: false
+                  }"
+                  (userChange)="writeRangeSliderChange($event, ctrl, r)"
+                ></ng5-slider>
+              </ng-container>
+            </div>
+          </div>
+          <div *ngSwitchCase="'mat-tab'">
+            <div>
+              <ng-container *ngIf="(ctrl.key|tabdesc:desc_copy); let tabs">
+                <mat-tab-group>
+                  <mat-tab
+                    *ngFor="let tab of tabs.tab_desc.tab_labels; let t = index"
+                    [label]="tab"
+                  >
+                    <form [formGroupName]="tab">
+                      <div
+                        class="flex flex-row ... justify-evenly"
+                        *ngFor="
+                          let tab_row of tabs.tab_ctrls[t];
+                          let trI = index
+                        "
+                      >
+                        <div
+                          *ngFor="let tab_ctrl of tab_row"
+                          class="flex flex-col ... justify-start"
+                          style="max-height: fit-content"
+                        >
+                        <div [ngSwitch]="tab_ctrl.type">
+                          <div *ngSwitchCase="'input'">
+                            <ng-container *ngIf="(tab_ctrl.key|inputopt:desc_copy:ctrl.key:tab); let inputs">
+                              <div>
+                                <div *ngIf="inputs.list.length > 0">
+                                  <div>
+                                    <ul
+                                      class="p-5 my-4"
+                                      [ngClass]="inputs.list.length > 1 ? inputs.class : ''"
+                                    >
+                                      <ng-container *ngIf="inputs.list.length > 1">
+                                        <div class="grp-head-text">
+                                          {{ tab_ctrl.key }}
+                                        </div>
+                                      </ng-container>
+                                      <li
+                                        [formArrayName]="tab_ctrl.key"
+                                        *ngFor="let input of inputs.list; let inp_index = index"
+                                        class="m-1"
+                                      >
+                                        <mat-form-field appearance="fill">
+                                          <mat-label>{{ input.label }}</mat-label>
+                                          <input
+                                            matInput
+                                            formControlName="{{ inp_index }}"
+                                            [type]="input.type"
+                                          />
+                                        </mat-form-field>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </ng-container>
+                          </div>
+                          <div *ngSwitchCase="'select'">
+                            <mat-form-field appearance="fill">
+                              <mat-label>{{ tab_ctrl.label }}</mat-label>
+                              <mat-select [formControlName]="tab_ctrl.key">
+                                <mat-option
+                                  *ngFor="let item of (tab_ctrl.key|selectopt:desc_copy:ctrl.key:tab); let item_index = index"
+                                  [value]="item_index"
+                                >
+                                  {{ item }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div *ngSwitchCase="'check'">
+                            <ng-container *ngIf="(tab_ctrl.key|checkopt:desc_copy:ctrl.key:tab); let check_boxes">
+                              <ul [ngClass]="check_boxes.class">
+                                <li
+                                  [formArrayName]="ctrl.key"
+                                  *ngFor="let check_box of check_boxes.list; let i = index"
+                                  class="m-1"
+                                >
+                                  <mat-checkbox
+                                    [formControlName]="i"
+                                    [color]="'accent'"
+                                    (change)="onCheckChange(r, ctrl.key)"
+                                  >
+                                    {{ check_box.id }}
+                                  </mat-checkbox>
+                                </li>
+                              </ul>
+                            </ng-container>
+                          </div>
+                          <div *ngSwitchCase="'radio'">
+                            <ng-container *ngIf="(tab_ctrl.key|radopt:desc_copy:ctrl.key:tab); let radio_grps">
+                              <div>
+                                <mat-radio-group
+                                  [formControlName]="ctrl.key"
+                                  class="p-5 my-4"
+                                  [ngClass]="radio_grps.class"
+                                >
+                                  <mat-radio-button
+                                    *ngFor="
+                                      let option of radio_grps.radio_grp.options;
+                                      let i = index
+                                    "
+                                    class="m-1 font-serif"
+                                    [value]="i"
+                                    >{{ option }}</mat-radio-button
+                                  >
+                                </mat-radio-group>
+                              </div>
+                            </ng-container>
+                          </div>
+                          <div *ngSwitchCase="'range-slider'">
+                            <div>
+                              <ng-container *ngIf="(ctrl|sliderdesc:desc_copy); let slider">
+                                <ng5-slider
+                                  [formControlName]="slider.key"
+                                  [options]="{
+                                    floor: slider.min,
+                                    ceil: slider.max,
+                                    hideLimitLabels: false,
+                                    hidePointerLabels: false
+                                  }"
+                                ></ng5-slider>
+                              </ng-container>
+                            </div>
+                          </div>
+                          <div *ngSwitchCase="'slider'">
+                            <div>
+                              <ng-container *ngIf="(ctrl|sliderdesc:desc_copy); let slider">
+                                <ng5-slider
+                                  [formControlName]="slider.key"
+                                  [options]="{
+                                    floor: slider.min,
+                                    ceil: slider.max,
+                                    hideLimitLabels: false,
+                                    hidePointerLabels: false
+                                  }"
+                                  (userChange)="writeRangeSliderChange($event, ctrl, r)"
+                                ></ng5-slider>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                    </form>
+                  </mat-tab>
+                </mat-tab-group>
+              </ng-container>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="itemcenter">
+    <div class="itemcenter my-5">
       <button
         mat-raised-button
         color="primary"

@@ -23,118 +23,97 @@ export class ControlBindService {
   //Utilities Buisness logic Methods
   checkboxChange = (
     cont_id: ContainerId,
-    desc: FormDesc[],
-    ctrl_key: Control_Key_Desc
+    dropped_items: Array<DraggableListItem>,
+    ctrl_key: Control_Key_Desc,
+    dropped_index: number
   ) => {
+    var desc: FormDesc[] = dropped_items[dropped_index].desc;
+    var covtype: Group_Check_Box[] = (<CheckBoxControl>dropped_items
+      .find((item) => item.id === 'ins')
+      ?.desc.find((ctrl_arr) =>
+        ctrl_arr.some((ctrl) => ctrl.key === Ins_Cont_Controls.CovType)
+      )
+      ?.find(
+        (ctrl) =>
+          ctrl.key === Ins_Cont_Controls.CovType && ctrl.type === 'check'
+      )).grp_list.filter((check_box) => check_box.checked);
     switch (cont_id) {
       case 'ins':
-        if (
-          ctrl_key === Ins_Cont_Controls.AgeReq ||
-          ctrl_key === Ins_Cont_Controls.CovType
-        ) {
-          var age_grp_index: number = desc.findIndex((ctrl_arr) =>
-            ctrl_arr.some((ctrl) => ctrl.key === Ins_Cont_Controls.AgeReq)
-          );
-          var cov_grp_index: number = desc.findIndex((ctrl_arr) =>
-            ctrl_arr.some((ctrl) => ctrl.key === Ins_Cont_Controls.CovType)
-          );
-          var agereq: CheckBoxControl = <CheckBoxControl>(
-            desc[age_grp_index].find(
-              (ctrl) => ctrl.key === Ins_Cont_Controls.AgeReq
+        var age_enabled: boolean | undefined = (<CheckBoxControl>(
+          desc
+            .find((ctrl_arr) =>
+              ctrl_arr.some((ctrl) => ctrl.key === Ins_Cont_Controls.AgeReq)
             )
-          );
-          var covtype: CheckBoxControl = <CheckBoxControl>(
-            desc[cov_grp_index].find(
-              (ctrl) => ctrl.key === Ins_Cont_Controls.CovType
+            ?.find(
+              (ctrl) =>
+                ctrl.key === Ins_Cont_Controls.AgeReq && ctrl.type === 'check'
             )
-          );
-          desc[age_grp_index] = desc[age_grp_index].filter(
-            (ctrl) =>
-              !ctrl.dyn_desc.dyn &&
-              ctrl.dyn_desc.rel === PlaceHolder_Cont_Controls.NONE
-          );
-          var age_enabled: boolean | undefined = agereq.grp_list.find(
-            (check_box) => check_box.id === 'Age/BirthDate'
-          )?.checked;
-          if (age_enabled) {
-            this.getLst_from_combCheck(
-              covtype.grp_list
-                .filter((check_box) => check_box.checked)
-                .map((check_box) => check_box.id),
-              cont_id
-            ).forEach((cov_type) => {
-              desc[age_grp_index].push(<InputControl>{
-                type: 'input',
-                key: <Control_Key_Desc>(<unknown>cov_type.split(' ').join('')),
-                label: cov_type,
-                grp_list: [
-                  {
-                    id: 'min',
-                    label: 'Minimum',
-                    validators: ['required'],
-                    value: '',
-                    type: 'number',
-                  },
-                  {
-                    id: 'max',
-                    label: 'Maximum',
-                    validators: ['required'],
-                    value: '',
-                    type: 'number',
-                  },
-                  {
-                    id: 'ren',
-                    label: 'Renewal',
-                    validators: ['required'],
-                    value: '',
-                    type: 'number',
-                  },
-                ],
-                class: 'input-list-col',
-                bindevent: true,
-                dyn_desc: {
-                  dyn: true,
-                  rel: Ins_Cont_Controls.CovType,
+        )).grp_list.find(
+          (check_box) => check_box.id === 'Age/BirthDate'
+        )?.checked;
+        var target_index = this.filterStaticControls(
+          desc,
+          PlaceHolder_Cont_Controls.NONE,
+          Ins_Cont_Controls.AgeReq
+        );
+        if (age_enabled) {
+          this.getLst_from_combCheck(
+            covtype.map((check_box) => check_box.id),
+            cont_id
+          ).forEach((cov_type) => {
+            desc[target_index].push(<InputControl>{
+              type: 'input',
+              key: <Control_Key_Desc>(<unknown>cov_type.split(' ').join('')),
+              label: cov_type,
+              grp_list: [
+                {
+                  id: 'min',
+                  label: 'Minimum',
+                  validators: ['required'],
+                  value: '',
+                  type: 'number',
                 },
-              });
+                {
+                  id: 'max',
+                  label: 'Maximum',
+                  validators: ['required'],
+                  value: '',
+                  type: 'number',
+                },
+                {
+                  id: 'ren',
+                  label: 'Renewal',
+                  validators: ['required'],
+                  value: '',
+                  type: 'number',
+                },
+              ],
+              class: 'input-list-col',
+              bindevent: true,
+              dyn_desc: {
+                dyn: true,
+                rel: Ins_Cont_Controls.CovType,
+              },
             });
-          }
+          });
         }
         break;
       case 'premrf':
-        var cov_grp_index: number = desc.findIndex((ctrl_arr) =>
-          ctrl_arr.some((ctrl) => ctrl.key === Ins_Cont_Controls.CovType)
-        );
-        var facts_grp_index: number = desc.findIndex((ctrl_arr) =>
-          ctrl_arr.some((ctrl) => ctrl.key === PremRF_Cont_Controls.PremFacts)
-        );
         var rat_facts: Group_Check_Box[] = (<CheckBoxControl>(
-          desc[facts_grp_index].find(
-            (ctrl) => ctrl.key === PremRF_Cont_Controls.PremFacts
-          )
-        )).grp_list.filter((checks) => checks.checked);
-        //desc=desc.splice(facts_grp_index,1);
-        var covtype: CheckBoxControl = JSON.parse(
-          JSON.stringify(
-            desc[cov_grp_index].find(
-              (ctrl) => ctrl.key === Ins_Cont_Controls.CovType
+          desc
+            .find((ctrl_arr) =>
+              ctrl_arr.some(
+                (ctrl) => ctrl.key === PremRF_Cont_Controls.PremFacts
+              )
             )
-          )
-        );
-        console.log(desc, rat_facts, covtype);
-        var age_fact: boolean | undefined = rat_facts.find(
-          (facts) => facts.id === 'Age'
-        )?.checked;
-      // if(age_fact){
-      //   this.getLst_from_combCheck(
-      //     covtype.grp_list
-      //       .filter((check_box) => check_box.checked)
-      //       .map((check_box) => check_box.id),
-      //     cont_id
-      //   ).forEach(covs =>{
-
-      //   });
-      // }
+            ?.find((ctrl) => ctrl.key === PremRF_Cont_Controls.PremFacts)
+        )).grp_list.filter((checks) => checks.checked);
+        if (rat_facts.map((checks) => checks.id).includes('Age')) {
+          this.getLst_from_combCheck(
+            covtype.map((check_box) => check_box.id),
+            cont_id
+          ).forEach((covs) => {});
+        }
     }
     return desc;
   };
@@ -215,17 +194,66 @@ export class ControlBindService {
           }
         }
         break;
-      case 'ins' || 'pdt':
+      case 'pdt':
         can = true;
+        break;
+      case 'ins':
+        can=true;
         break;
     }
     return can;
   };
-  filterStaticControls=(desc:FormDesc[])=>{
-    var indices:number[]=[];
-    var index=0;
-    desc.forEach(ctrl_grp=>{
-      
-    });
+  filterStaticControls = (
+    desc: FormDesc[],
+    ctrl_key: Control_Key_Desc,
+    rel_ctrl_key: Control_Key_Desc
+  ): number => {
+    if (ctrl_key === PlaceHolder_Cont_Controls.NONE) {
+      var grp_index = desc.findIndex((ctrl_arr) =>
+        ctrl_arr.every((ctrl) => ctrl.dyn_desc.dyn)
+      );
+      if (grp_index === -1) {
+        grp_index = desc.findIndex((ctrl_arr) =>
+          ctrl_arr.some((ctrl) => ctrl.key === rel_ctrl_key)
+        );
+        if (grp_index === desc.length - 1) {
+          if (!desc[grp_index + 1]) {
+            desc.push([]);
+          }
+          grp_index++;
+        } else {
+          grp_index++;
+          desc.splice(grp_index, 0, []);
+        }
+      } else {
+        desc[grp_index] = [];
+      }
+      return grp_index;
+    } else {
+      var grp_index = desc.findIndex((ctrl_arr) =>
+        ctrl_arr.some((ctrl) => ctrl.key === ctrl_key)
+      );
+      desc[grp_index] = desc[grp_index].filter(
+        (ctrl) =>
+          !ctrl.dyn_desc.dyn &&
+          ctrl.dyn_desc.rel === PlaceHolder_Cont_Controls.NONE
+      );
+      return grp_index;
+    }
+  };
+  getMeta_Info_forCheck = (
+    cont_id: ContainerId,
+    check_list: string[]
+  ): string[] => {
+    var metaInfo: string[] = [];
+    switch (cont_id) {
+      case 'ins':
+        metaInfo = this.getLst_from_combCheck(check_list, cont_id);
+        break;
+      case 'premrf':
+        metaInfo = check_list;
+        break;
+    }
+    return metaInfo;
   };
 }

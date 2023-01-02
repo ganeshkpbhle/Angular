@@ -20,5 +20,5 @@ export type DropListItem ={
 export type DialogInput={
   cont_name:string;
   cont_id: ContainerId;
-  form_desc: Array<FormDesc>
+  form_desc:DraggableListItem[]
 }

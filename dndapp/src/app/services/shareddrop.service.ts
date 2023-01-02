@@ -5,10 +5,20 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Injectable } from '@angular/core';
-import { ContainerId, DraggableListItem, DropListItem } from '../shared/template';
+import {
+  ContainerId,
+  DraggableListItem,
+  DropListItem,
+} from '../shared/template';
 import { MatDialog } from '@angular/material/dialog';
 import { EntityDialogComponent } from '../Dialog/entity-dialog/entity-dialog.component';
-import { FormDesc, GenInfo_Cont_Controls, Ins_Cont_Controls, PlaceHolder_Cont_Controls, PremRF_Cont_Controls } from '../shared/formdesc';
+import {
+  FormDesc,
+  GenInfo_Cont_Controls,
+  Ins_Cont_Controls,
+  PlaceHolder_Cont_Controls,
+  PremRF_Cont_Controls,
+} from '../shared/formdesc';
 import { ControlBindService } from './control-bind.service';
 @Injectable({
   providedIn: 'root',
@@ -38,7 +48,7 @@ export class ShareddropService {
               },
             ],
             class: 'input-list-col',
-            dyn_desc: {dyn:false,rel:PlaceHolder_Cont_Controls.NONE},
+            dyn_desc: { dyn: false, rel: PlaceHolder_Cont_Controls.NONE },
           },
         ],
       ],
@@ -88,13 +98,13 @@ export class ShareddropService {
             validators: ['required'],
             required: true,
             mincheck: 1,
-            class: 'check-list-col',
+            class: 'check-list-col p-2 m-2',
             bindevent: true,
-            dyn_desc: {dyn:false,rel:PlaceHolder_Cont_Controls.NONE}
+            dyn_desc: { dyn: false, rel: PlaceHolder_Cont_Controls.NONE },
           },
           {
             type: 'radio',
-            key:Ins_Cont_Controls.GrpIndv,
+            key: Ins_Cont_Controls.GrpIndv,
             label: 'Indvidual or GroupRated',
             grp_items: {
               options: ['Indvidual', 'Non-Indvidual'],
@@ -103,8 +113,8 @@ export class ShareddropService {
             validators: [],
             class: 'radio-list-col',
             bindevent: false,
-            dyn_desc: {dyn:false,rel:PlaceHolder_Cont_Controls.NONE}
-          }
+            dyn_desc: { dyn: false, rel: PlaceHolder_Cont_Controls.NONE },
+          },
         ],
         [
           {
@@ -120,10 +130,64 @@ export class ShareddropService {
             validators: [],
             required: false,
             mincheck: 0,
-            class: 'check-list-col',
+            class: 'check-list-col p-2 mx-4 my-2',
             bindevent: true,
-            dyn_desc: {dyn:false,rel:PlaceHolder_Cont_Controls.NONE}
-          }
+            dyn_desc: { dyn: false, rel: PlaceHolder_Cont_Controls.NONE },
+          },
+          {
+            type: 'select',
+            key: Ins_Cont_Controls.OverAge,
+            label: 'Over-Age Cancellation',
+            options: [
+              'Anniversary',
+              'End Term',
+              'Immediately',
+              'Never',
+              'Next Due Billing',
+              'Canc When No Children Eligible',
+            ],
+            validators: [],
+            option: 0,
+            bindevent: false,
+            dyn_desc: {
+              dyn: false,
+              rel: PlaceHolder_Cont_Controls.NONE,
+            },
+            required: false,
+          },
+        ],
+        [
+          {
+            type: 'mat-tab',
+            key: PremRF_Cont_Controls.PremFactsTab,
+            label: 'Premium-Rating-Factors',
+            class: '',
+            dyn_desc: {
+              dyn: false,
+              rel: PlaceHolder_Cont_Controls.NONE,
+            },
+            controls: [
+              {
+                group:{label:'First', grp:0},
+                control:{
+                  type: 'slider',
+                  key: PremRF_Cont_Controls.AgeSlide,
+                  label: 'Age-Band',
+                  min: 0,
+                  max: 100,
+                  value: 50,
+                  bindevent: true,
+                  class: '',
+                  dyn_desc: {
+                    dyn: false,
+                    rel: PlaceHolder_Cont_Controls.NONE,
+                  },
+                  validators: ['required'],
+                }
+              }
+            ],
+            tab_labels:['First','Second','Third']
+          },
         ]
       ],
       meta_ctrl: Ins_Cont_Controls.CovType,
@@ -172,13 +236,13 @@ export class ShareddropService {
             validators: ['required'],
             required: true,
             mincheck: 1,
-            class: 'check-list-col',
+            class: 'check-list-col p-2 m-2',
             bindevent: true,
-            dyn_desc: {dyn:false,rel:PlaceHolder_Cont_Controls.NONE}
-          }
+            dyn_desc: { dyn: false, rel: PlaceHolder_Cont_Controls.NONE },
+          },
         ],
       ],
-      meta_ctrl: PlaceHolder_Cont_Controls.NONE,
+      meta_ctrl: PremRF_Cont_Controls.PremFacts,
     },
     {
       id: 'benrf',
@@ -257,7 +321,10 @@ export class ShareddropService {
     private dialog: MatDialog,
     private control_bind: ControlBindService
   ) {}
-  drop(event: CdkDragDrop<DraggableListItem[]>,combined_list:Array<DropListItem>): void {
+  drop(
+    event: CdkDragDrop<DraggableListItem[]>,
+    combined_list: Array<DropListItem>
+  ): void {
     var tgt_sidenav: boolean = event.container.id === 'sidenav';
     if (event.container.id === event.previousContainer.id) {
       moveItemInArray(
@@ -272,7 +339,14 @@ export class ShareddropService {
         event.previousContainer.data[event.previousIndex].id ||
       (tgt_sidenav && event.previousContainer.id !== 'sidenav')
     ) {
-      if (!tgt_sidenav && combined_list.length>0 && this.control_bind.canDrop(combined_list,<ContainerId>event.container.id)) {
+      if (
+        !tgt_sidenav &&
+        combined_list.length > 0 &&
+        this.control_bind.canDrop(
+          combined_list,
+          <ContainerId>event.container.id
+        )
+      ) {
         //code to open dialog
         transferArrayItem(
           event.previousContainer.data,
@@ -283,8 +357,12 @@ export class ShareddropService {
         const dialogRef = this.dialog.open(EntityDialogComponent, {
           data: {
             cont_id: event.container.id,
-            form_desc: event.container.data[event.currentIndex].desc,
-            cont_name:event.container.data[event.currentIndex].name
+            form_desc: combined_list
+              .map((items) => items.dropItem)
+              .reduce(function (prev, curr) {
+                return prev.concat(curr);
+              }),
+            cont_name: event.container.data[event.currentIndex].name,
           },
           panelClass: 'full-screen-modal',
         });
@@ -293,7 +371,7 @@ export class ShareddropService {
             event.container.data[event.currentIndex].desc = result;
           }
         );
-      } else if(tgt_sidenav) {
+      } else if (tgt_sidenav) {
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,

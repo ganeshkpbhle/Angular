@@ -152,5 +152,7 @@
   min-width:300px;
 }
 .dialog-res{
-  min-width: max-content;max-height:500px;min-height: max-content;
+  min-width: max-content;min-height:max-content;
+  max-height:500px;
+  overflow-y: scroll;
 }

@@ -14,6 +14,8 @@ import { EditproductComponent } from './editproduct/editproduct.component';
 import { EntityDialogComponent } from './Dialog/entity-dialog/entity-dialog.component';
 import { MatFormField } from '@angular/material/form-field';
 import { Ng5SliderModule } from 'ng5-slider';
+import { DroplistsPipe, MetaInfoPipe } from './shared/pipes/create-product/droplists.pipe';
+import { CheckOptionsPipe, InputOptionsPipe,RadioOptionsPipe, SelectOptionsPipe, SilderDescPipe, TabDescPipe } from './shared/pipes/dialog-pipes/dialoginput.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,15 @@ import { Ng5SliderModule } from 'ng5-slider';
     CreateproductComponent,
     HeaderComponent,
     EditproductComponent,
-    EntityDialogComponent
+    EntityDialogComponent,
+    DroplistsPipe,
+    MetaInfoPipe,
+    InputOptionsPipe,
+    CheckOptionsPipe,
+    SelectOptionsPipe,
+    RadioOptionsPipe,
+    SilderDescPipe,
+    TabDescPipe
   ],
   imports: [
     BrowserModule,
