@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-content>
+        <div class="d-flex flex-row justify-content-around" *ngIf="stat">
+            <div class="d-flex flex-column">
+                <p class="nick-name mt-1">{{"You"}}</p>
+                <p class="acct py-1">{{sAddr?.substring(0,14)}}</p>
+                <p class="tstamp py-2">{{stat.tstamp}}</p>
+            </div>
+            <div class="d-flex flex-column">
+                <div *ngIf="trnd; else left">
+                    <i class="fa-solid fa-arrow-right-long fa-3x py-2"></i>
+                </div>
+                <ng-template #left>
+                    <i class="fa-solid fa-arrow-left-long fa-3x py-2"></i>
+                </ng-template>
+                <p class="catg py-1">{{_common.toHTML(stat.catg)}}</p>
+                <p class="amount py-1">{{stat.units+" "+unit}}</p>
+            </div>
+            <div class="d-flex flex-column">
+                <p class="nick-name mt-1">{{stat.receiverName}}</p>
+                <div *ngIf="stat.recvAddr!==sAddr; else self">
+                    <p class="acct py-1">{{stat.recvAddr.substring(0,14)}}</p>
+                </div>
+                <ng-template #self>
+                    <p class="acct py-1">{{stat.sendAddr.substring(0,14)}}</p>
+                </ng-template>
+                <p [ngClass]="{'comp':stat.confirm,'pend':!stat.confirm,'py-2':true}">
+                    {{stat.confirm?"Completed":"Pending"}}</p>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

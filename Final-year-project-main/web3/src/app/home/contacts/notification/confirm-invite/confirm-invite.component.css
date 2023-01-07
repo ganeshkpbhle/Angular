@@ -1,0 +1,13 @@
+.form-flex{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width:500px;
+}
+.full-width {
+    width: 100%;
+    min-width:400px;
+    max-width: 600px;
+    border-radius: 20px;
+}

@@ -9,6 +9,7 @@ import {
   Ins_Cont_Controls,
   PlaceHolder_Cont_Controls,
   PremRF_Cont_Controls,
+  TabbedControls,
 } from '../shared/formdesc';
 import {
   ContainerId,
@@ -99,6 +100,11 @@ export class ControlBindService {
         }
         break;
       case 'premrf':
+        var target_index = this.filterStaticControls(
+          desc,
+          PlaceHolder_Cont_Controls.NONE,
+          PremRF_Cont_Controls.PremFacts
+        );
         var rat_facts: Group_Check_Box[] = (<CheckBoxControl>(
           desc
             .find((ctrl_arr) =>
@@ -108,11 +114,44 @@ export class ControlBindService {
             )
             ?.find((ctrl) => ctrl.key === PremRF_Cont_Controls.PremFacts)
         )).grp_list.filter((checks) => checks.checked);
+        var tab: TabbedControls = {
+          type: 'mat-tab',
+          key: PremRF_Cont_Controls.PremFactsTab,
+          label: 'Premium-Rating-Factors',
+          class: '',
+          dyn_desc: {
+            dyn: true,
+            rel: Ins_Cont_Controls.CovType,
+          },
+          controls: [],
+          tab_labels: [],
+        };
         if (rat_facts.map((checks) => checks.id).includes('Age')) {
-          this.getLst_from_combCheck(
+          tab.tab_labels = this.getLst_from_combCheck(
             covtype.map((check_box) => check_box.id),
             cont_id
-          ).forEach((covs) => {});
+          );
+          tab.tab_labels.forEach((label) => {
+            tab.controls.push({
+              group: { label, grp: 1 },
+              control: {
+                type: 'slider',
+                key: PremRF_Cont_Controls.AgeSlide,
+                label: 'Age-Band',
+                min: 0,
+                max: 100,
+                value: 50,
+                bindevent: true,
+                class: '',
+                dyn_desc: {
+                  dyn: true,
+                  rel: PremRF_Cont_Controls.PremFacts,
+                },
+                validators: ['required'],
+              },
+            });
+          });
+          desc[target_index].push(tab);
         }
     }
     return desc;
@@ -123,6 +162,7 @@ export class ControlBindService {
   ): string[] => {
     var meta_info: string[] = [];
     switch (cont_id) {
+      case 'premrf':
       case 'ins':
         check_list.forEach((e) => {
           var splitted_items = e.split(' ');
@@ -198,7 +238,7 @@ export class ControlBindService {
         can = true;
         break;
       case 'ins':
-        can=true;
+        can = true;
         break;
     }
     return can;

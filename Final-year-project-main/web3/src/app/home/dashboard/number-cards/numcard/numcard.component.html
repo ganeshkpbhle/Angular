@@ -1,0 +1,14 @@
+<div class="card total-decor" *ngIf="card_ent && card_ent.In && card_ent.Out">
+    <div class="card-body d-flex flex-column rounded p-0">
+        <p class="text-cust py-2 px-3">{{name}}</p>
+        <p class="total py-2 px-3">{{card_ent.In+card_ent.Out}}</p>
+        <div class="d-inline-flex flex-row justify-content-evenly">
+            <div class="incoming w-50 p-2" >
+                {{card_ent.In}}
+            </div>
+            <div class="outgoing w-50 p-2">
+                {{card_ent.Out}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="d-flex flex-column justify-content-center">
+    <div class="container-fluid rounded">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="card bg-white px-3">
+                    <div class="card-body left">
+                        <form [formGroup]="form" (ngSubmit)="Submit()">
+                            <h1 class="py-4 ">Sign In</h1>
+                            <input type="email" formControlName="username" placeholder="Email" />
+                            <!-- <div *ngIf="form.controls['username'].invalid && (form.controls['username'].dirty || form.controls['username'].touched)" class="form-text text-danger">
+                                <div *ngIf="m['username'].errors">
+                                Please enter username or Email
+                              </div>
+                            </div> -->
+                            <input type="password" formControlName="passwd" placeholder="Password" />
+                            <a class="py-2" (click)="resetPass()" [routerLink]="">Forgot your password?</a>
+                            <button type="submit" class="mt-2" [disabled]="form.invalid">SIGN IN</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12">
+                <div class="card bg-black px-4 py-5">
+                    <div class="card-body right">
+                        <div class="overlay-panel overlay-right">
+                            <h1>Hello, Buddy!</h1>
+                            <p>You can also use your wallet to get in </p>
+                            <button class="ghost mx-4" id="signUp" (click)="connectWallet()">Meta Mask
+                                Connect</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

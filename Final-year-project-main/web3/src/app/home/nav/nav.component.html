@@ -1,0 +1,65 @@
+<div class="d-inline-flex flex-column bd-highlight bg-black">
+    <div class="card bg-black">
+        <div class="card-body">
+            <div class="d-inline-flex flex-row justify-content-between p-4">
+                <div class="bd-highlight">
+                    <i class="fa-brands fa-gg fa-3x pdt-icon"></i>
+                </div>
+                <div class="bd-highlight p-2">
+                    <a routerLink="" class="product-logo">
+                        DEFYN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card bg-black">
+        <div class="card-body">
+            <ul class="d-inline-flex flex-column items">
+                <li *ngFor="let item of SideElements;" [ngClass]="item?.cName" routerLinkActive="active"
+                    #rl="routerLinkActive">
+                    <a [routerLink]="item.path" class="d-inline-flex flex-row">
+                        <div class="bd-highlight">
+                            <i [class]="rl.isActive?item.iconactive:item.iconinactive"></i>
+                        </div>
+                        <div class="bd-highlight pt-1">
+                            <p>
+                                {{item.title}}
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card bg-black">
+        <div class="card-body">
+            <div class="d-inline-flex flex-column">
+                <div class="nav-menu-items">
+                    <div class="d-inline-flex flex-row align-items-center">
+                        <button class="btn icon-active" type="button" mat-raised-button
+                            (click)="connectWallet()" [innerHTML]="buttontxt"></button>
+                    </div>
+                </div>
+
+                 <!-- <div class="nav-menu-items">
+                    <a routerLink="#" class=" d-inline-flex flex-row">
+                        <i class="fa-solid fa-headset px-3 icon-inactive"></i>
+                        <p>
+                            Support
+                        </p>
+                    </a>
+                </div>  -->
+                <div class="nav-menu-items">
+                    <a routerLink="Profile" class=" d-inline-flex flex-row">
+                        <i class="fa-solid fa-user px-3 icon-inactive"></i>
+                        <p>
+                            Profile
+                        </p>
+                    </a>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>

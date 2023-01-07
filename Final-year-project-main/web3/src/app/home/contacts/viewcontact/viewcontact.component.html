@@ -1,0 +1,14 @@
+<div class="d-inline-flex c-card">
+    <img [src]="dpUrl+card.name+card.actualName+'.svg'" class="img img-fluid dp-image">
+    <p class="contact-name mt-5">{{card.name}}</p>
+    <div class="accts">
+        <p class="acct-header mt-3">{{"Accounts"}}</p>
+        <ul>
+            <li *ngFor="let account of card.accounts">{{account.address}}</li>
+        </ul>
+    </div>
+    <button mat-raised-button color="warn" class="my-4 block-btn" [disabled]="blockStats" *ngIf="!card.block;else unblock" (click)="setBlock(true)">Block</button>
+    <ng-template #unblock>
+        <button mat-raised-button color="primary" class="my-4 block-btn" [disabled]="blockStats" (click)="setBlock(false)">UnBlock</button>
+    </ng-template>
+</div>

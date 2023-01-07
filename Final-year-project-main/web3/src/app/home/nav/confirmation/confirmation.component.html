@@ -1,0 +1,20 @@
+<div class="d-inline-flex flex-row bd-highlight pop-up-body p-5">
+    <div class="bd-highlight acct-list">
+        <div class="p-2 bd-highlight">
+            <h2 class="msg-text p-1">Hey {{userName}}, one moment please</h2>
+        </div>
+        <div class="p-2 bd-highlight">
+            <p class="msg">{{"Make sure that you're only connecting to Your accounts mentioned below and keep the account selected in metamask"}}</p>
+        </div>
+        <ul class="accts">
+            <li *ngFor="let acct of cachedAddr">{{acct}}</li>
+        </ul>
+        <div class="p-2 bd-highlight" *ngIf="availAccts.length===0">
+            <p class="msg">Connect Your Account to proceed</p>
+        </div>
+        <div class="mt-5 p-2 bd-highlight">
+            <button mat-raised-button class="btn btn-danger py-1 mx-1" (click)="Close()" type="button">Cancel</button>
+            <button mat-raised-button class="btn btn-success py-1 mx-1" type="submit" [disabled]="availAccts.length===0" (click)="proceed()">Proceed</button>
+        </div>
+    </div>
+</div>

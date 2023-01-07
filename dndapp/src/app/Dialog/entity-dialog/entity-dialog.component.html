@@ -114,7 +114,7 @@
           </div>
           <div *ngSwitchCase="'range-slider'">
             <div>
-              <ng-container *ngIf="(ctrl|sliderdesc:desc_copy); let slider">
+              <ng-container *ngIf="(ctrl.key|sliderdesc:desc_copy); let slider">
                 <ng5-slider
                   [formControlName]="slider.key"
                   [options]="{
@@ -129,7 +129,7 @@
           </div>
           <div *ngSwitchCase="'slider'">
             <div>
-              <ng-container *ngIf="(ctrl|sliderdesc:desc_copy); let slider">
+              <ng-container *ngIf="(ctrl.key|sliderdesc:desc_copy); let slider">
                 <ng5-slider
                   [formControlName]="slider.key"
                   [options]="{
@@ -138,7 +138,7 @@
                     hideLimitLabels: false,
                     hidePointerLabels: false
                   }"
-                  (userChange)="writeRangeSliderChange($event, ctrl, r)"
+                  (userChange)="writeRangeSliderChange($event, ctrl.key)"
                 ></ng5-slider>
               </ng-container>
             </div>
@@ -254,7 +254,7 @@
                           </div>
                           <div *ngSwitchCase="'range-slider'">
                             <div>
-                              <ng-container *ngIf="(ctrl|sliderdesc:desc_copy); let slider">
+                              <ng-container *ngIf="(tab_ctrl.key|sliderdesc:desc_copy:ctrl.key:tab); let slider">
                                 <ng5-slider
                                   [formControlName]="slider.key"
                                   [options]="{
@@ -269,7 +269,7 @@
                           </div>
                           <div *ngSwitchCase="'slider'">
                             <div>
-                              <ng-container *ngIf="(ctrl|sliderdesc:desc_copy); let slider">
+                              <ng-container *ngIf="(tab_ctrl.key|sliderdesc:desc_copy:ctrl.key:tab); let slider">
                                 <ng5-slider
                                   [formControlName]="slider.key"
                                   [options]="{
@@ -278,7 +278,7 @@
                                     hideLimitLabels: false,
                                     hidePointerLabels: false
                                   }"
-                                  (userChange)="writeRangeSliderChange($event, ctrl, r)"
+                                  (userChange)="writeRangeSliderChange($event,ctrl.key,tab_ctrl.key,tab)"
                                 ></ng5-slider>
                               </ng-container>
                             </div>

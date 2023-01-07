@@ -1,0 +1,23 @@
+.total{
+    font-size:40px;
+    font-family: 'Blinker', sans-serif;
+}
+.text-cust{
+    font-family: 'Blinker', sans-serif;
+    font-size:28px;
+}
+.total-decor{
+    border-radius:10px;
+    /* border-right:10px solid #0dd09f; */
+}
+.incoming{
+    border-right:1px solid rgb(61, 26, 26);
+    border-top:2px solid rgb(215, 212, 212);
+}
+.outgoing{
+    border-left:1px solid rgb(215, 212, 212);
+    border-top:2px solid rgb(215, 212, 212);
+}
+.card-sub{
+    width:100%;
+}

@@ -83,25 +83,37 @@ export class EntityDialogComponent implements OnInit {
   };
   writeRangeSliderChange = (
     change: ChangeContext,
-    ctrl_desc: GenericControl,
-    row: number
+    ctrl_key: Control_Key_Desc,
+    tab_ctrl_key?: Control_Key_Desc,
+    tab_label?: string
   ) => {
-    var slider_ctrl: GenericControl = <GenericControl>(
-      this.desc_copy[row].find((ctrl) => ctrl.key === ctrl.key)
-    );
-    switch (slider_ctrl.type) {
+    var ctrl_desc:GenericControl;
+    if(tab_ctrl_key && tab_label){
+      var tab: TabbedControls = <TabbedControls>(
+        this.flat_control_list.find(
+          (e) => e.key === ctrl_key && e.type === 'mat-tab'
+        )
+      );
+      ctrl_desc=<GenericControl>tab.controls
+      .filter((tab_ctrl) => tab_ctrl.group.label === tab_label)
+      .map((tab_ctrl) => tab_ctrl.control)
+      .find((inner_ctrl) => inner_ctrl.key === tab_ctrl_key);
+    }
+    else{
+      ctrl_desc=<GenericControl>this.flat_control_list.find(ctrl => ctrl.key===ctrl_key);
+    }
+    switch (ctrl_desc.type) {
       case 'range-slider':
         if (change.value && change.highValue) {
-          slider_ctrl.range = [change.value, change.highValue];
+          ctrl_desc.range = [change.value, change.highValue];
         }
         break;
       case 'slider':
         if (change.value) {
-          slider_ctrl.value = change.value;
+          ctrl_desc.value = change.value;
         }
         break;
     }
-    this.dlgGroup.controls[ctrl_desc.key].markAsDirty();
   };
   getTabDesc = (
     ctrl_key: Control_Key_Desc
@@ -167,28 +179,6 @@ export class EntityDialogComponent implements OnInit {
     );
     this.data.form_desc[this.dropped_list_index].desc = this.desc_copy;
     this.load_Form_Controls(this.data);
-  };
-  writeRangeSliderChange_tab = (
-    change: ChangeContext,
-    ctrl_desc: GenericControl,
-    row: number
-  ) => {
-    var slider_ctrl: GenericControl = <GenericControl>(
-      this.desc_copy[row].find((ctrl) => ctrl.key === ctrl.key)
-    );
-    switch (slider_ctrl.type) {
-      case 'range-slider':
-        if (change.value && change.highValue) {
-          slider_ctrl.range = [change.value, change.highValue];
-        }
-        break;
-      case 'slider':
-        if (change.value) {
-          slider_ctrl.value = change.value;
-        }
-        break;
-    }
-    this.dlgGroup.controls[ctrl_desc.key].markAsDirty();
   };
   closeDialog = () => {
     this.dialogRef.close();

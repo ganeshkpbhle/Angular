@@ -1,0 +1,42 @@
+.c-card{
+    min-width:600px;
+    flex-direction: column;
+    max-width: max-content;
+    justify-content:center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.block-btn{
+    font-size: 20px;
+}
+.dp-image{
+    max-width:140px;
+    border-radius: 100px;
+    background-color:rgb(202, 195, 195);
+}
+.contact-name{
+    font-size: 36px;
+    font-family: 'Blinker', sans-serif;
+    word-wrap: break-word;
+}
+.accts{
+    text-align:start;
+    display:inline-flex;
+    flex-direction:column;
+    align-items: flex-start;
+}
+.accts > ul{
+    list-style: none;
+    margin: 0 auto;
+}
+.acct-header{
+    font-size: 26px;
+    font-family: 'Blinker', sans-serif;
+    word-wrap: break-word;
+}
+.accts > ul > li{
+    font-size: 20px;
+    font-family: 'Blinker', sans-serif;
+    word-wrap: break-word;
+}

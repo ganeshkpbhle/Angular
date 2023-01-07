@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="w-100">
+            <form [formGroup]="form">
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <p class="cust-font mx-2">Status For</p>
+                    <div class="bd-highlight p-2 mx-2">
+                        <mat-form-field appearance="fill" class="full-width">
+                            <mat-label class="label-text">Account</mat-label>
+                            <mat-select class="content" formControlName="account" (selectionChange)="acctChange()">
+                                <mat-option class="content" *ngFor="let acct of accts;let i=index" [value]="i">
+                                    {{acct}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="bd-highlight p-2 mx-2">
+                        <mat-form-field class="quarter-width" appearance="fill">
+                            <mat-label class="label-text">Chain</mat-label>
+                            <mat-select class="content" formControlName="chain" (selectionChange)="chainChange()">
+                                <mat-option class="content" *ngFor="let chain of chains;let i=index" [value]="chain.id">
+                                    {{chain.desc}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="w-100">
+            <ul class="flex-scroll">
+                <li *ngFor="let stat of stats" class="my-2">
+                    <app-statuscard [stat]="stat" [trnd]="stat.sendAddr===currentAcct" [chainId]="nwkctrl.value" [sAddr]="accts[acctrl.value]"></app-statuscard>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

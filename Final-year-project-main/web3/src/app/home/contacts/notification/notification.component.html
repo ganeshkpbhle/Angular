@@ -1,0 +1,30 @@
+<mat-tab-group class="tab-section" mat-align-tabs="center">
+    <mat-tab label="Invites">
+        <ul class="contact-list" [ngClass]="{'flex-scroll':(invites.reqs.length>4)}" *ngIf="invites.reqs.length!==0"
+            cols="1">
+            <li *ngFor="let friend of invites.reqs;let i=index;" class="contact-card p-2 my-4">
+                <div class="card-flex p-2">
+                    <p class="contact-name">{{friend.get("friendName")}}</p>
+                    <div class="btn-flex justify-content-between">
+                        <button mat-flat-button color="primary" class="btn" (click)="accept(i)">Accept</button>
+                        <button mat-flat-button color="warn" class="btn" (click)="decline(i)">Decline</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </mat-tab>
+    <mat-tab label="Pending">
+        <ul class="contact-list" [ngClass]="{'flex-scroll':(invites.pends.length>4)}" *ngIf="invites.pends.length!==0"
+            cols="1">
+            <li *ngFor="let friend of invites.pends;let i=index;" class="contact-card p-2 my-4">
+                <div class="card-flex">
+                    <p class="contact-name">{{friend.get("friendName")}}</p>
+                    <div class="d-flex flex-column justify-content-between" style="max-width: 200px;min-height: 120px;">
+                        <button class="btn btn-danger" color="warn" (click)="cancel(i)">Cancel Request</button>
+                        <p class="date-text">{{"Created at : "+friend.get("createdAt")}}</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </mat-tab>
+</mat-tab-group>

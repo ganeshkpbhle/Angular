@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-flex">
+        <div class="bd-highlight py-1 mt-2" *ngIf="!(data.name && data.name?.length>0)">
+            <h2 class="msg-text p-1">Choose NickName</h2>
+        </div>
+        <div class="bd-highlight py-1 mt-2" *ngIf="data.name && data.name?.length>0">
+            <h2 class="msg-text p-1">{{data.name}}</h2>
+        </div>
+        <div class="bd-highlight p-1" *ngIf="!(data.name && data.name?.length>0)">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label class="label-text">Nick Name</mat-label>
+                <input type="text" matInput formControlName="fnickname">
+            </mat-form-field>
+        </div>
+        <div class="bd-highlight p-1">
+            <mat-selection-list formControlName="address">
+                <mat-list-option [value]="acct.value" *ngFor="let acct of acctArr" [selected]="acct.selected">
+                  {{ acct.acct }}
+                </mat-list-option>
+              </mat-selection-list>
+        </div>
+        <div class="d-inline-flex flex-row bd-highlight justify-content-center">
+            <button mat-raised-button class="btn btn-danger py-1 mx-1" (click)="Close()" type="button">Cancel</button>
+            <button mat-raised-button class="pay-btn py-1 mx-1" type="submit" [disabled]="form.invalid"
+                color="Primary">accept</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,30 @@
+p{
+    font-family: 'Blinker', sans-serif;
+}
+.message1{
+    font-size: 36px;
+}
+.message2{
+    font-size: 24px;
+}
+.message3{
+    font-size: 18px;
+}
+.card{
+    font-family: 'Blinker', sans-serif;
+    font-size:18px;
+    border-radius: 10px;
+    border: 1px solid rgb(173, 173, 173);
+    padding: 0 auto;
+}
+.btn{
+    font-size: 26px;
+    background-color: #14cc9e;
+    font-family: 'Blinker', sans-serif;
+}
+.icon-custom:hover{
+    cursor: pointer;
+}
+.img{
+    max-width: 60px;
+}

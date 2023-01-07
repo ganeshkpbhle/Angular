@@ -1,0 +1,269 @@
+<div class="container-fluid my-2">
+    <div class="row row-align">
+        <div class="col-xl-8 col-lg-8 col-md-10 col-sm-10 col-10">
+            <mat-tab-group class="tab-section" mat-align-tabs="center">
+                <mat-tab label="Friendly">
+                    <form [formGroup]="form1" class="form" (ngSubmit)="submitFriendly()">
+                        <div class="d-inline-flex flex-column p-2" style="position:sticky;">
+                            <div class="bd-highlight py-1 mt-2">
+                                <mat-form-field class="full-width" appearance="fill">
+                                    <mat-label class="label-text">Current Account</mat-label>
+                                    <input type="text" matInput formControlName="currentAcct" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="bd-highlight p-1">
+                                <mat-form-field appearance="fill" class="quarter-width">
+                                    <mat-label>Receiver Name</mat-label>
+                                    <mat-select formControlName="receiverName" (selectionChange)="receiverChange()">
+                                        <mat-option *ngFor="let friend of friends;let i=index;" [value]="i">
+                                            {{friend.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="bd-highlight p-1">
+                                <mat-form-field appearance="fill" class="full-width">
+                                    <mat-label>Receiver Address</mat-label>
+                                    <mat-select formControlName="receiverAddr">
+                                        <mat-option *ngFor="let acct of recvAcct;let i=index" [value]="acct.address">
+                                            {{acct.address}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="bd-highlight p-1">
+                                <div class="d-inline-flex flex-row flex-row-align">
+                                    <mat-form-field
+                                        [ngClass]="{'half-width':tokenAdrrs.length!==0,'full-width':tokenAdrrs.length===0}"
+                                        appearance="fill">
+                                        <mat-label>Network</mat-label>
+                                        <input type="text" matInput formControlName="network" readonly="true">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="fill" class="semi-width" *ngIf="tokenAdrrs.length!==0">
+                                        <mat-label>Sub Chain</mat-label>
+                                        <mat-select formControlName="tokens" [value]="0">
+                                            <mat-option *ngFor="let token of tokenAdrrs;let i=index;" [value]="i">
+                                                {{token.token.desc}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="bd-highlight p-1">
+                                <div class="d-inline-flex flex-row flex-row-align">
+                                    <mat-form-field appearance="fill" class="quarter-width">
+                                        <mat-label>Category</mat-label>
+                                        <mat-select formControlName="category">
+                                            <mat-option *ngFor="let cat of catArr" [value]="cat">
+                                                {{cat}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <div class="d-flex flex-column align-items-center">
+                                        <mat-form-field class="half-width" appearance="fill">
+                                            <mat-label>amount</mat-label>
+                                            <input type="number" matInput formControlName="amount"
+                                                (focusout)="balanceCheck(0)">
+                                        </mat-form-field>
+                                        <div class="text-danger" *ngIf="unitCtrl[0].hasError('low')">
+                                            <p class="text-alert">
+                                                low balance !
+                                            </p>
+                                        </div>
+                                        <div class="text-danger" *ngIf="unitCtrl[0].hasError('invalid')">
+                                            <p class="text-alert">
+                                                Enter Valid qty!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bd-highlight p-1">
+                                <mat-form-field class="full-width" appearance="fill">
+                                    <mat-label>Description</mat-label>
+                                    <input type="text" matInput formControlName="desc">
+                                </mat-form-field>
+                            </div>
+                            <div class="bd-highlight p-1 text-center">
+                                <button mat-raised-button class="pay-btn px-4 py-1"
+                                    [disabled]="form1.invalid">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-tab>
+                <mat-tab label="Strangers">
+                    <div class="d-inline-flex flex-column p-2">
+                        <form [formGroup]="form2" (ngSubmit)="submitOthers()">
+                            <div class="d-inline-flex flex-column p-2">
+                                <div class="bd-highlight py-1 mt-2">
+                                    <mat-form-field class="full-width" appearance="fill">
+                                        <mat-label class="label-text">Current Account</mat-label>
+                                        <input type="text" matInput formControlName="currentAcct" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="bd-highlight p-1" *ngIf="false">
+                                    <mat-form-field appearance="fill" class="quarter-width">
+                                        <mat-label class="label-text">Receiver Name</mat-label>
+                                        <input type="text" matInput formControlName="receiverName">
+                                    </mat-form-field>
+                                </div>
+                                <div class="bd-highlight p-1">
+                                    <mat-form-field appearance="fill" class="full-width">
+                                        <mat-label>Receiver Address</mat-label>
+                                        <input type="text" matInput formControlName="receiverAddr">
+                                    </mat-form-field>
+                                </div>
+                                <div class="bd-highlight p-1">
+                                    <mat-form-field appearance="fill" class="quarter-width">
+                                        <mat-label>Receiver Name</mat-label>
+                                        <input type="text" matInput formControlName="receiverName">
+                                    </mat-form-field>
+                                </div>
+                                <div class="bd-highlight p-1">
+                                    <div class="d-inline-flex flex-row flex-row-align">
+                                        <mat-form-field
+                                            [ngClass]="{'half-width':tokenAdrrs.length!==0,'full-width':tokenAdrrs.length===0}"
+                                            appearance="fill">
+                                            <mat-label>Network</mat-label>
+                                            <input type="text" matInput formControlName="network" readonly="true">
+                                        </mat-form-field>
+                                        <mat-form-field appearance="fill" class="semi-width"
+                                            *ngIf="tokenAdrrs.length!==0">
+                                            <mat-label>Sub Chain</mat-label>
+                                            <mat-select formControlName="tokens" [value]="0">
+                                                <mat-option *ngFor="let token of tokenAdrrs;let i=index;" [value]="i">
+                                                    {{token.token.desc}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="bd-highlight p-1">
+                                    <div class="d-inline-flex flex-row flex-row-align">
+                                        <mat-form-field appearance="fill" class="quarter-width">
+                                            <mat-label>Category</mat-label>
+                                            <mat-select formControlName="category">
+                                                <mat-option *ngFor="let cat of catArr" [value]="cat">
+                                                    {{cat}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <mat-form-field class="half-width" appearance="fill">
+                                                <mat-label>amount</mat-label>
+                                                <input type="number" matInput formControlName="amount"
+                                                    (focusout)="balanceCheck(1)">
+                                            </mat-form-field>
+                                            <div class="text-danger" *ngIf="unitCtrl[1].hasError('low')">
+                                                <p class="text-alert">
+                                                    low balance !
+                                                </p>
+                                            </div>
+                                            <div class="text-danger" *ngIf="unitCtrl[1].hasError('invalid')">
+                                                <p class="text-alert">
+                                                    Enter Valid qty!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bd-highlight p-1">
+                                    <mat-form-field class="full-width" appearance="fill">
+                                        <mat-label>Description</mat-label>
+                                        <input type="text" matInput formControlName="desc">
+                                    </mat-form-field>
+                                </div>
+                                <div class="bd-highlight p-1 text-center">
+                                    <button mat-raised-button class="pay-btn px-4 py-1"
+                                        [disabled]="form2.invalid">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Self">
+                    <div class="d-inline-flex flex-column p-2">
+                        <form [formGroup]="form3" class="form" (ngSubmit)="submitSelf()">
+                            <div class="d-inline-flex flex-column p-1">
+                                <div class="bd-highlight py-1 mt-2">
+                                    <mat-form-field class="full-width" appearance="fill">
+                                        <mat-label class="label-text">Current Account</mat-label>
+                                        <input type="text" matInput formControlName="currentAcct" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="bd-highlight">
+                                    <mat-form-field appearance="fill" class="full-width">
+                                        <mat-label>to Address</mat-label>
+                                        <mat-select formControlName="toaddress">
+                                            <mat-option *ngFor="let addr of selfAddr;let i=index" [value]="i">
+                                                {{addr}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="bd-highlight p-1">
+                                    <mat-form-field class="full-width" appearance="fill">
+                                        <mat-label>Network</mat-label>
+                                        <input type="text" matInput formControlName="network" readonly="true">
+                                    </mat-form-field>
+                                    <div class="d-inline-flex flex-row" style="max-width:300px;">
+                                        <mat-form-field appearance="fill" class="half-width"
+                                            *ngIf="tokenAdrrs.length!==0">
+                                            <mat-label>Sub Chain</mat-label>
+                                            <mat-select formControlName="tokens" [value]="0">
+                                                <mat-option *ngFor="let token of tokenAdrrs;let i=index;" [value]="i">
+                                                    {{token.token.desc}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <mat-form-field class="semi-width" appearance="fill">
+                                                <mat-label>Units</mat-label>
+                                                <input type="number" matInput formControlName="amount"
+                                                    (focusout)="balanceCheck(2)">
+                                            </mat-form-field>
+                                            <div class="text-danger" *ngIf="unitCtrl[2].hasError('low')">
+                                                <p class="text-alert">
+                                                    low balance !
+                                                </p>
+                                            </div>
+                                            <div class="text-danger" *ngIf="unitCtrl[2].hasError('invalid')">
+                                                <p class="text-alert">
+                                                    Enter Valid qty!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bd-highlight p-1 text-center">
+                                    <button mat-raised-button class="pay-btn px-4 py-1"
+                                        [disabled]="form3.invalid">transfer</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-auto col-sm-auto col-auto">
+            <div class="card text-center">
+                <div class="card-header balance" style="background-color: rgb(39, 184, 176);">
+                    {{chainInfo.desc}}
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group" *ngIf="tokenAdrrs.length!==0">
+                        <li *ngFor="let chain of tokenAdrrs;let i=index;"
+                            class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">{{chain.token.desc}}</div>
+                            </div>
+                            <span class="badge bg-primary rounded-pill p-2"
+                                style="font-size:22px;min-width:100px;max-width: 100px;">{{chain.balance}}</span>
+                        </li>
+                    </ul>
+                    <mat-progress-bar mode="determinate" *ngIf="tokenAdrrs.length===0" value="40"></mat-progress-bar>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

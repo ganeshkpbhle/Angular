@@ -25,8 +25,8 @@ export class InputOptionsPipe implements PipeTransform {
   transform(
     ctrl_key: Control_Key_Desc,
     desc_copy: FormDesc[],
-    tab_ctrl_key?: Control_Key_Desc, 
-    tab_label?: string 
+    tab_ctrl_key?: Control_Key_Desc,
+    tab_label?: string
   ): Input_Options {
     var flat_control_list: FormDesc = desc_copy.reduce(function (prev, curr) {
       return prev.concat(curr);
@@ -60,8 +60,8 @@ export class RadioOptionsPipe implements PipeTransform {
   transform(
     ctrl_key: Control_Key_Desc,
     desc_copy: FormDesc[],
-    tab_ctrl_key?: Control_Key_Desc, 
-    tab_label?: string 
+    tab_ctrl_key?: Control_Key_Desc,
+    tab_label?: string
   ): RadioOptions {
     var flat_control_list: FormDesc = desc_copy.reduce(function (prev, curr) {
       return prev.concat(curr);
@@ -95,8 +95,8 @@ export class CheckOptionsPipe implements PipeTransform {
   transform(
     ctrl_key: Control_Key_Desc,
     desc_copy: FormDesc[],
-    tab_ctrl_key?: Control_Key_Desc, 
-    tab_label?: string 
+    tab_ctrl_key?: Control_Key_Desc,
+    tab_label?: string
   ): Check_Options {
     var flat_control_list: FormDesc = desc_copy.reduce(function (prev, curr) {
       return prev.concat(curr);
@@ -130,8 +130,8 @@ export class SelectOptionsPipe implements PipeTransform {
   transform(
     ctrl_key: Control_Key_Desc,
     desc_copy: FormDesc[],
-    tab_ctrl_key?: Control_Key_Desc, 
-    tab_label?: string 
+    tab_ctrl_key?: Control_Key_Desc,
+    tab_label?: string
   ): SelectOptions {
     var flat_control_list: FormDesc = desc_copy.reduce(function (prev, curr) {
       return prev.concat(curr);
@@ -162,24 +162,36 @@ export class SelectOptionsPipe implements PipeTransform {
 @Pipe({
   name: 'sliderdesc',
 })
-export class SilderDescPipe implements PipeTransform{
-  transform(ctrl_desc:GenericControl,desc_copy:FormDesc[]):RangeSliderControl | SliderControl | undefined {
+export class SilderDescPipe implements PipeTransform {
+  transform(
+    ctrl_key: Control_Key_Desc,
+    desc_copy: FormDesc[],
+    tab_ctrl_key?: Control_Key_Desc,
+    tab_label?: string
+  ): RangeSliderControl | SliderControl | undefined {
     var flat_control_list: FormDesc = desc_copy.reduce(function (prev, curr) {
       return prev.concat(curr);
     });
+    var ctrl_desc:GenericControl;
+    if (tab_ctrl_key && tab_label) {
+      var tab: TabbedControls = <TabbedControls>(
+        flat_control_list.find(
+          (e) => e.key === tab_ctrl_key && e.type === 'mat-tab'
+        )
+      );
+      ctrl_desc=<GenericControl>tab.controls
+      .filter((tab_ctrl) => tab_ctrl.group.label === tab_label)
+      .map((tab_ctrl) => tab_ctrl.control)
+      .find((inner_ctrl) => inner_ctrl.key === ctrl_key);
+    }
+    else{
+      ctrl_desc=<GenericControl>flat_control_list.find((e)=> e.key === ctrl_key);
+    }
     switch (ctrl_desc.type) {
       case 'range-slider':
-        return <RangeSliderControl>(
-          flat_control_list.find(
-            (ctrl) => ctrl.key === ctrl_desc.key && ctrl.type === 'range-slider'
-          )
-        );
+        return <RangeSliderControl>(ctrl_desc);
       case 'slider':
-        return <SliderControl>(
-          flat_control_list.find(
-            (ctrl) => ctrl.key === ctrl_desc.key && ctrl.type === 'slider'
-          )
-        );
+        return <SliderControl>(ctrl_desc);
       default:
         return;
     }
@@ -188,8 +200,8 @@ export class SilderDescPipe implements PipeTransform{
 @Pipe({
   name: 'tabdesc',
 })
-export class TabDescPipe implements PipeTransform{
-  transform(ctrl_key: Control_Key_Desc, desc_copy:FormDesc[]):TabControlDesc {
+export class TabDescPipe implements PipeTransform {
+  transform(ctrl_key: Control_Key_Desc, desc_copy: FormDesc[]): TabControlDesc {
     var flat_control_list: FormDesc = desc_copy.reduce(function (prev, curr) {
       return prev.concat(curr);
     });

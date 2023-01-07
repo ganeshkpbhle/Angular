@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+        <div class="card bg-black">
+            <div class="card-body left">
+                <h1 class="py-2">Hola...</h1>
+                <p class="txt">Few more steps to enjoy..</p>
+                <button class="ghost" id="signIn" (click)="remove()">Thanks for choosing us</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-5 col-md-12 col-12">
+        <div class="card bg-white px-2">
+            <div class="card-body right">
+                <form [formGroup]="form" (ngSubmit)="Submit()">
+                    <h1 class="py-5">Help Us To Reach You :)</h1>
+                    <input type="text" formControlName="username" placeholder="UserName" />
+                    <input type="email" formControlName="email" placeholder="Email" />
+                    <input type="text" formControlName="mobile" placeholder="MobileNo" />
+                    <input type="password" formControlName="passwd" placeholder="Password" />
+                    <button class="btn btn-secondary mt-4" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

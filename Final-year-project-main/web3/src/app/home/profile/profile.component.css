@@ -1,0 +1,462 @@
+.dp-image{
+    max-width:150px;
+    border-radius: 100px;
+    background-color:rgb(255, 255, 255);}
+
+
+    
+    @media screen and (min-width: 200px) {
+        ::ng-deep .mat-tab-labels .mat-tab-label {
+            font-family: 'Blinker', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #000000;
+            width: 100%;
+        }
+        ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+            font-family: 'Blinker', sans-serif;
+            font-size: 28px;
+            color: #000000;
+            letter-spacing: 3px;
+            background-color: rgb(39, 184, 176);
+            border-radius: 6px;
+        }
+        ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+            background-color: rgb(39, 184, 176);
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex{
+            font-family: 'Blinker', sans-serif;
+            font-size: 18px;
+            border-radius: 10px;
+            border-bottom: none;
+            border:1px solid #b9b7b7;
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-underline{
+            width:0;
+            height:0;
+        }
+        .tab-section{
+            max-width:550px;
+            max-height:720px;
+            /* border: 1px solid #8be3cd; */
+            border:1px solid rgb(88, 87, 87);
+            border-radius: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+        .container-fluid{
+            min-width:650px;
+        }
+        .full-width {
+            width: 80%;
+        }
+        .label-text{
+            font-size: 14px;
+        }
+        .quarter-width{
+            width: 60%;
+        }
+        .half-width{
+            width: 50%;
+        }
+        .semi-width{
+            width:50%;
+        }
+        .flex-column{
+            text-align: start;
+            max-width: 350px;
+            max-height:700px;
+        }
+        .pay-btn{
+            font-size: 22px;
+            background-color: #14cc9e;
+            font-family: 'Blinker', sans-serif;
+        }
+        .text-alert{
+            font-family: 'Blinker', sans-serif;
+            color: red;
+            font-size: 16px;
+        }
+        .balance{
+            font-family: 'Blinker', sans-serif;
+            font-size: 24px;
+        }
+        .unit{
+            font-family: 'Blinker', sans-serif;
+            font-size: 20px;
+        }
+        .card{
+            max-width: 400px;
+            max-height:max-content;
+            margin-bottom: 0 auto;
+            margin-top: 10px;
+        }
+        .row-align{
+            justify-content:center;
+            align-items: center;
+        }
+        .flex-row-align{
+            justify-content: space-between;
+        }
+    }
+    @media screen and (min-width: 700px) {
+        ::ng-deep .mat-tab-labels .mat-tab-label {
+            font-family: 'Blinker', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #000000;
+            width: 100%;
+        }
+        ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+            font-family: 'Blinker', sans-serif;
+            font-size: 28px;
+            color: #000000;
+            letter-spacing: 3px;
+            background-color: rgb(39, 184, 176);
+            border-radius: 6px;
+        }
+        ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+            background-color: rgb(39, 184, 176);
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex{
+            font-family: 'Blinker', sans-serif;
+            font-size: 18px;
+            border-radius: 10px;
+            border-bottom: none;
+            border:1px solid #b9b7b7;
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-underline{
+            width:0;
+            height:0;
+        }
+        .tab-section{
+            max-width:550px;
+            max-height:720px;
+            /* border: 1px solid #8be3cd; */
+            border:1px solid rgb(88, 87, 87);
+            border-radius: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+        .container-fluid{
+            min-width:650px;
+        }
+        .full-width {
+            width: 80%;
+        }
+        .label-text{
+            font-size: 14px;
+        }
+        .quarter-width{
+            width: 60%;
+        }
+        .half-width{
+            width: 50%;
+        }
+        .semi-width{
+            width:50%;
+        }
+        .flex-column{
+            text-align: start;
+            max-width: 350px;
+            max-height:700px;
+        }
+        .pay-btn{
+            font-size: 22px;
+            background-color: #14cc9e;
+            font-family: 'Blinker', sans-serif;
+        }
+        .text-alert{
+            font-family: 'Blinker', sans-serif;
+            color: red;
+            font-size: 16px;
+        }
+        .balance{
+            font-family: 'Blinker', sans-serif;
+            font-size: 24px;
+        }
+        .unit{
+            font-family: 'Blinker', sans-serif;
+            font-size: 20px;
+        }
+        .card{
+            max-width: 400px;
+            max-height:max-content;
+            margin-bottom: 0 auto;
+            margin-top: 10px;
+        }
+        .row-align{
+            justify-content:center;
+            align-items: center;
+        }
+        .flex-row-align{
+            justify-content: space-between;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        ::ng-deep .mat-tab-labels .mat-tab-label {
+            font-family: 'Blinker', sans-serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            color: #000000;
+            width: 100%;
+        }
+        ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+            font-family: 'Blinker', sans-serif;
+            font-size: 28px;
+            color: #000000;
+            letter-spacing: 3px;
+            background-color: rgb(39, 184, 176);
+            border-radius: 6px;
+        }
+        ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+            background-color: rgb(39, 184, 176);
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex{
+            font-family: 'Blinker', sans-serif;
+            font-size: 18px;
+            border-radius: 10px;
+            border-bottom: none;
+            border:1px solid #b9b7b7;
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-underline{
+            width:0;
+            height:0;
+        }
+        .tab-section{
+            min-width:max-content;
+            min-height:max-content;
+            /* border: 1px solid #8be3cd; */
+            border:1px solid rgb(88, 87, 87);
+            border-radius: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+        .container-fluid{
+            min-width:800px;
+        }
+        .full-width {
+            width: 80%;
+        }
+        .label-text{
+            font-size: 14px;
+        }
+        .quarter-width{
+            width: 60%;
+        }
+        .half-width{
+            width: 50%;
+        }
+        .semi-width{
+            width:50%;
+        }
+        .flex-column{
+            text-align: start;
+            min-width: 240px;
+            max-width: 440px;
+        }
+        .pay-btn{
+            font-size: 22px;
+            background-color: #14cc9e;
+            font-family: 'Blinker', sans-serif;
+        }
+        .text-alert{
+            font-family: 'Blinker', sans-serif;
+            color: red;
+            font-size: 16px;
+        }
+        .balance{
+            font-family: 'Blinker', sans-serif;
+            font-size: 24px;
+        }
+        .unit{
+            font-family: 'Blinker', sans-serif;
+            font-size: 20px;
+        }
+        .row-align{
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card{
+            max-width: 450px;
+            max-height:max-content;
+        }
+        .flex-row-align{
+            justify-content: space-evenly;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        ::ng-deep .mat-tab-labels .mat-tab-label {
+            font-family: 'Blinker', sans-serif;
+            font-size: 22px;
+            letter-spacing: 4px;
+            color: #000000;
+            width: 100%;
+        }
+        ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+            font-family: 'Blinker', sans-serif;
+            font-size: 34px;
+            color: #000000;
+            letter-spacing: 3px;
+            background-color: rgb(39, 184, 176);
+            border-radius: 6px;
+        }
+        ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+            background-color: rgb(39, 184, 176);
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex{
+            font-family: 'Blinker', sans-serif;
+            font-size: 18px;
+            border-radius: 10px;
+            border-bottom: none;
+            border:1px solid #b9b7b7;
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-underline{
+            width:0;
+            height:0;
+        }
+        .tab-section{
+            min-width:max-content;
+            min-height:max-content;
+            /* border: 1px solid #8be3cd; */
+            border:1px solid rgb(88, 87, 87);
+            border-radius: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+        .container-fluid{
+            min-width:900px;
+        }
+        .full-width {
+            width: 90%;
+        }
+        .label-text{
+            font-size: 16px;
+        }
+        .quarter-width{
+            width: 70%;
+        }
+        .half-width{
+            width: 40%;
+        }
+        .semi-width{
+            width:50%;
+        }
+        .flex-column{
+            text-align: start;
+            min-width: 290px;
+            max-width: 700px;
+        }
+        .pay-btn{
+            font-size: 24px;
+            background-color: #14cc9e;
+            font-family: 'Blinker', sans-serif;
+        }
+        .text-alert{
+            font-family: 'Blinker', sans-serif;
+            color: red;
+            font-size: 18px;
+        }
+        .balance{
+            font-family: 'Blinker', sans-serif;
+            font-size: 28px;
+        }
+        .unit{
+            font-family: 'Blinker', sans-serif;
+            font-size: 24px;
+        }
+        .row-align{
+            justify-content: space-between;
+            align-items: center;
+        }
+        .flex-row-align{
+            max-width: 400px;
+            justify-content: space-between;
+        }
+    }
+    @media screen and (min-width: 1500px) {
+        ::ng-deep .mat-tab-labels .mat-tab-label {
+            font-family: 'Blinker', sans-serif;
+            font-size: 24px;
+            letter-spacing: 5px;
+            color: #000000;
+            width: 100%;
+        }
+        ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+            font-family: 'Blinker', sans-serif;
+            font-size: 36px;
+            color: #000000;
+            letter-spacing: 5px;
+            background-color: rgb(39, 184, 176);
+            border-radius: 6px;
+        }
+        ::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+            background-color: rgb(39, 184, 176);
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex{
+            font-family: 'Blinker', sans-serif;
+            font-size: 18px;
+            border-radius: 10px;
+            border-bottom: none;
+            border:1px solid #b9b7b7;
+        }
+        ::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-underline{
+            width:0;
+            height:0;
+        }
+        .tab-section{
+            max-width:max-content;
+            min-width:655px;
+            min-height:max-content;
+            /* border: 1px solid #8be3cd; */
+            border:1px solid rgb(88, 87, 87);
+            border-radius: 10px;
+            background-color: rgb(255, 255, 255);
+        }
+        .container-fluid{
+            min-width:1000px;
+        }
+        .full-width {
+            width: 100%;
+        }
+        .label-text{
+            font-size: 16px;
+        }
+        .quarter-width{
+            width: 80%;
+        }
+        .half-width{
+            width: 50%;
+        }
+        .semi-width{
+            width:40%;
+        }
+        .flex-column{
+            text-align: start;
+            min-width: 350px;
+            max-width: 500px;
+        }
+        .pay-btn{
+            font-size: 26px;
+            background-color: #14cc9e;
+            font-family: 'Blinker', sans-serif;
+        }
+        .text-alert{
+            font-family: 'Blinker', sans-serif;
+            color: red;
+            font-size: 18px;
+        }
+        .balance{
+            font-family: 'Blinker', sans-serif;
+            font-size: 28px;
+        }
+        .unit{
+            font-family: 'Blinker', sans-serif;
+            font-size: 24px;
+        }
+        .row-align{
+            justify-content: space-between;
+            align-items: center;
+        }
+        .flex-row-align{
+            max-width: max-content;
+            min-width:00px;
+            justify-content:space-between;
+        }
+    }

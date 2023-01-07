@@ -1,0 +1,74 @@
+.cust-font{
+    font-family: 'Blinker', sans-serif;
+    font-size: 28px;
+    line-height:30px;
+}
+.full-width {
+    width: 100%;
+    min-width:400px;
+}
+.label-text{
+    font-size: 18px;
+    font-family: 'Blinker', sans-serif;
+    color: black;
+}
+.quarter-width{
+    width: 80%;
+}
+.half-width{
+    width: 50%;
+}
+.semi-width{
+    width:40%;
+}
+.content{
+    font-size: 22px;
+    font-family: 'Blinker', sans-serif;
+    color: black;
+}
+::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex{
+    font-family: 'Blinker', sans-serif;
+    font-size: 18px;
+    border-radius: 10px;
+    border-bottom: none;
+    border:1px solid #b9b7b7;
+}
+::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-underline{
+    width:0;
+    height:0;
+}
+ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 720px;
+    min-height:fit-content;
+}
+.flex-scroll {
+    overflow-y: scroll;
+    padding: 0px 15px 0px 0px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+    visibility: hidden;
+    max-height: 300px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #73d7be;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #14CC9E;
+    max-height: 300px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #07cf9d;
+}

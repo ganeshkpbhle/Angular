@@ -1,0 +1,83 @@
+.total{
+    font-size:100px;
+    font-family: 'Blinker', sans-serif;
+}
+.text-cust{
+    font-family: 'Blinker', sans-serif;
+    font-size:28px;
+}
+.total-decor{
+    border-radius:10px;
+    border-right:10px solid #0dd09f;
+}
+.incoming{
+    border-right:1px solid rgb(61, 26, 26);
+    border-top:2px solid rgb(215, 212, 212);
+}
+.outgoing{
+    border-left:1px solid rgb(215, 212, 212);
+    border-top:2px solid rgb(215, 212, 212);
+}
+.card-sub{
+    width:100%;
+}
+.sep-line{
+    height:2px;
+}
+.advanced-pie-legend {
+    max-width:400px;
+}
+.advanced-pie-legend .legend-items-container .legend-items {
+    overflow: initial !important;
+}
+.advanced-pie-legend .total-label{
+    padding:5px 5px 5px 5px;
+    margin-top:5px;
+}
+.advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label{
+    padding:10px 10px 10px 10px;
+}
+.cust-font{
+    font-family: 'Blinker', sans-serif;
+    font-size: 24px;
+    line-height:26px;
+}
+.full-width {
+    width: 100%;
+    min-width:300px;
+}
+.label-text{
+    font-size: 16px;
+    font-family: 'Blinker', sans-serif;
+    color: black;
+}
+.quarter-width{
+    width: 60%;
+}
+.half-width{
+    width: 30%;
+}
+.content{
+    font-size: 22px;
+    font-family: 'Blinker', sans-serif;
+    color: black;
+}
+::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex{
+    font-family: 'Blinker', sans-serif;
+    font-size: 18px;
+    border-radius: 10px;
+    border-bottom: none;
+    border:1px solid #b9b7b7;
+}
+::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex input{
+    font-family: 'Blinker', sans-serif;
+    font-size: 18px;
+    border-radius: 10px;
+    border-bottom: none;
+    border:1px solid #b9b7b7;
+}
+::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-underline{
+    width:0;
+    height:0;
+}
+

@@ -1,0 +1,14 @@
+<div class="d-inline-flex flex-column align-items-center justify-content-between" style="min-width: 800px;">
+    <div class="d-flex flex-column align-items-end"  style="min-width: 700px;">
+        <i class="fa-solid fa-xmark fa-2x p-2 icon-custom" (click)="close()"></i>
+    </div>
+    <p class="message1 my-2">Hooray <img src="assets/img/party.png" class="img img-fluid"></p>
+    <p class="message2 my-4">Transaction Initiated with transaction hash</p>
+    <div class="card my-2" style="max-width:700px;">
+        <div class="card-body">
+            {{hash}}
+        </div>
+    </div>
+    <p class="message3 p-2 mt-2">Please visit stats section to know the current status</p>
+    <button class="btn mt-1" (click)="Stats()">Take me there</button>
+</div>

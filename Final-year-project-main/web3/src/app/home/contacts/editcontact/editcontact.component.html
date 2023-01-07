@@ -1,0 +1,41 @@
+<div class="d-inline-flex flex-row bd-highlight pop-up-body p-5">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="d-inline-flex flex-column">
+            <div class="bd-highlight py-1 mt-2">
+                <h2 class="msg-text p-1">Please Make Sure The Address Was Correct</h2>
+            </div>
+            <div class="d-inline-flex flex-row justify-content-around" style="min-width: 350px;max-width:480px;">
+                <mat-form-field class="quarter-width" appearance="fill">
+                    <mat-label class="label-text">Friend's Name</mat-label>
+                    <input type="text" matInput formControlName="name">
+                </mat-form-field>
+                <button mat-mini-fab color="primary" type="button" class="mt-1"
+                    [disabled]="(namectrl.touched && namectrl.dirty && (namectrl.invalid || namectrl.value===card.name || savingName))"
+                    (click)="updateNickName()">
+                    <mat-icon>done_outline</mat-icon>
+                </button>
+            </div>
+            <div class="bd-highlight p-1" formArrayName="addresses"
+                *ngFor="let ctrl of getControls().controls;let i=index;let l=last;let f=first;">
+                <div class="d-inline-flex flex-row bd-highlight">
+                    <mat-form-field appearance="fill" class="full-width" formGroupName={{i}}>
+                        <mat-label>Public Address</mat-label>
+                        <input type="text" matInput formControlName="address" readonly="true">
+                    </mat-form-field>
+                    <button mat-mini-fab class="m-2" color="warn" *ngIf="!f||(getControls().length>1)" type="button">
+                        <mat-icon class="add-icon" (click)="removeControl(i)">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="d-inline-flex flex-row bd-highlight justify-content-center">
+                <button mat-raised-button class="pay-btn py-1 mx-1" type="submit" [disabled]="form.invalid"
+                    color="primary">Request More Address</button>
+                <button mat-raised-button class="btn btn-danger py-1 mx-1" (click)="Close()"
+                    type="button">Cancel</button>
+            </div>
+            <div class="text-danger" *ngIf="errtxt.length>0">
+                {{errtxt}}
+            </div>
+        </div>
+    </form>
+</div>

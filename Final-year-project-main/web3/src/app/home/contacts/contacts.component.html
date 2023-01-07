@@ -1,0 +1,47 @@
+<div class="contacts">
+    <div class="header-flex d-flex bd-highlight mb-3" [ngClass]="{'justify-content-between':friends.length>0,'justify-content-end':friends.length===0}">
+        <p class="head-text mr-auto" *ngIf="friends.length>0">
+            {{"Friends"}}
+        </p>
+        <div class="d-flex flex-row not-flex">
+            <button mat-fab class="button-ele" (click)="viewNotification()" [disabled]="!invites">
+                <mat-icon class="add-icon">add_alert</mat-icon>
+            </button>
+
+            <button mat-fab (click)="addContact()" class="button-ele">
+                <mat-icon class="add-icon">add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <p class="list-empty" *ngIf="friends.length===0">
+        No friends ? Please press + Button to add
+    </p>
+    <ul class="d-flex flex-column contact-list" [ngClass]="{'flex-scroll':(friends.length>4)}"
+        *ngIf="friends.length!==0" cols="1">
+        <li *ngFor="let friend of friends;let i=index;" class="contact-card">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column">
+                    <img [src]="dpUrl+friend.name+friend.actualName+'.svg'" class="img img-fluid dp-image">
+                    <p class="acctnum">
+                        {{(friend.accounts.length>1)?friend.accounts.length+"Accounts":friend.accounts.length+"Account"}}
+                    </p>
+                </div>
+                <div class="d-flex flex-column justify-content-between align-items-end">
+                    <p class="contact-name">{{friend.name}}</p>
+                    <div class="d-flex flex-row align-items-center">
+                        <mat-icon [color]="'warn'" *ngIf="friend.block">not_interested</mat-icon>
+                        <button mat-mini-fab color="white" (click)="viewContact(i)" class="mx-2 btn-width">
+                            <mat-icon class="icon-width">remove_red_eye</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="primary" (click)="editContact(i)" *ngIf="!friend.block" class="mx-2 btn-width">
+                            <mat-icon class="icon-width">edit</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="warn" *ngIf="friend.accounts.length===1 && !friend.block" class="mx-2 btn-width">
+                            <mat-icon class="icon-width">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

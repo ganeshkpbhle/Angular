@@ -1,0 +1,44 @@
+h4 {
+    font-family: 'Permanent Marker', cursive;
+    color: #5c6bc0;
+    text-align: center; 
+    font-size: 46px;
+    padding: 15px;
+  }
+  
+  .h4 span {
+    color: #dfdeee;
+    font-weight: lighter;
+  }
+  
+  h5 {
+    font-family: 'Secular One', sans-serif;
+    font-size: 20px;
+    color: #a1a4ad;
+    letter-spacing: 1.5px;
+    text-align: center; 
+  }
+  
+  .btn1 {
+    border:0;
+    background-color: #14CC9E;
+    font-family: 'Prompt', sans-serif;
+    color: #000000;
+    border-radius: 20px;
+    width: 320px;
+    height:max-content;
+    font-size: 20px;
+  }
+  .btn1:hover{
+      cursor: pointer;
+      box-shadow: 0 8px 10px -3px #14CC9E;
+  }
+  .custom-img{
+      max-width: 80px;
+      max-height: 50px;
+      padding: 5px;
+  }
+  .flex-row{
+      align-items: center;
+  }
+

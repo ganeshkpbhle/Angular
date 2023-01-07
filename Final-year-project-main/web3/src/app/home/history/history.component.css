@@ -1,0 +1,80 @@
+::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-flex {
+    font-family: 'Blinker', sans-serif;
+    font-size: 18px;
+    border-radius: 10px;
+    border-bottom: none;
+    border: 1px solid #b9b7b7;
+}
+
+::ng-deep .mat-form-field .mat-form-field-wrapper .mat-form-field-underline {
+    width: 0;
+    height: 0;
+}
+
+table {
+    width: 100%;
+    min-width: max-content;
+}
+::ng-deep .mat-paginator-container{
+    width: 100%;
+    min-width: max-content;
+}
+::ng-deep .mat-header-row .mat-header-cell {
+    font-family: 'Blinker', sans-serif;
+    font-size: 18px;
+    color: black;
+}
+
+::ng-deep .mat-paginator-page-size {
+    font-family: 'Blinker', sans-serif;
+    font-size: 20px;
+}
+
+::ng-deep .mat-paginator-page-size .mat-form-field-wrapper .mat-form-field-flex {
+    font-family: 'Blinker', sans-serif;
+    font-size: 8px;
+    padding: 0;
+}
+
+::ng-deep .mat-paginator-page-size .mat-form-field-wrapper .mat-form-field-flex .mat-select-value {
+    font-family: 'Blinker', sans-serif;
+    font-size: 16px;
+    padding: 5px;
+}
+
+::ng-deep .mat-table .mat-row .mat-cell {
+    font-family: 'Blinker', sans-serif;
+    text-align: start;
+    font-size: 20px;
+}
+::ng-deep .mat-table{
+    border-radius: 20px;
+}
+.act-name {
+    font-family: 'Blinker', sans-serif;
+    font-size: 20px;
+}
+
+.name {
+    font-family: 'Blinker', sans-serif;
+    font-size: 24px;
+}
+
+.addr {
+    font-family: 'Blinker', sans-serif;
+    font-size: 18px;
+}
+
+.download-btn {
+    font-family: 'Blinker', sans-serif;
+    font-size: 26px;
+    background-color: #14CC9E;
+}
+
+.download-btn:hover {
+    box-shadow: 0 8px 10px -3px #14CC9E;
+}
+
+.mat-header-cell{
+    background-color: #2fd5ac;
+}

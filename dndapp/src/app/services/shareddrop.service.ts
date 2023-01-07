@@ -154,41 +154,41 @@ export class ShareddropService {
               rel: PlaceHolder_Cont_Controls.NONE,
             },
             required: false,
-          },
+          }
         ],
-        [
-          {
-            type: 'mat-tab',
-            key: PremRF_Cont_Controls.PremFactsTab,
-            label: 'Premium-Rating-Factors',
-            class: '',
-            dyn_desc: {
-              dyn: false,
-              rel: PlaceHolder_Cont_Controls.NONE,
-            },
-            controls: [
-              {
-                group:{label:'First', grp:0},
-                control:{
-                  type: 'slider',
-                  key: PremRF_Cont_Controls.AgeSlide,
-                  label: 'Age-Band',
-                  min: 0,
-                  max: 100,
-                  value: 50,
-                  bindevent: true,
-                  class: '',
-                  dyn_desc: {
-                    dyn: false,
-                    rel: PlaceHolder_Cont_Controls.NONE,
-                  },
-                  validators: ['required'],
-                }
-              }
-            ],
-            tab_labels:['First','Second','Third']
-          },
-        ]
+        // [
+        //   {
+        //     type: 'mat-tab',
+        //     key: PremRF_Cont_Controls.PremFactsTab,
+        //     label: 'Premium-Rating-Factors',
+        //     class: '',
+        //     dyn_desc: {
+        //       dyn: false,
+        //       rel: PlaceHolder_Cont_Controls.NONE,
+        //     },
+        //     controls: [
+        //       {
+        //         group:{label:'First', grp:1},
+        //         control:{
+        //           type: 'slider',
+        //           key: PremRF_Cont_Controls.AgeSlide,
+        //           label: 'Age-Band',
+        //           min: 0,
+        //           max: 100,
+        //           value: 50,
+        //           bindevent: true,
+        //           class: '',
+        //           dyn_desc: {
+        //             dyn: false,
+        //             rel: PlaceHolder_Cont_Controls.NONE,
+        //           },
+        //           validators: ['required'],
+        //         }
+        //       }
+        //     ],
+        //     tab_labels:['First','Second','Third']
+        //   },
+        // ]
       ],
       meta_ctrl: Ins_Cont_Controls.CovType,
     },

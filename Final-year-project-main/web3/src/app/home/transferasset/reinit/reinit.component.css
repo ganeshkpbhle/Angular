@@ -1,0 +1,20 @@
+p{
+    font-family: 'Blinker', sans-serif;
+}
+.message1{
+    font-size: 36px;
+}
+.message2{
+    font-size: 28px;
+    color: red;
+}
+.message3{
+    font-size: 22px;
+}
+.img{
+    max-width: 60px;
+}
+.btn{
+    min-width:200px;
+    font-size: 20px;
+}

@@ -1,0 +1,29 @@
+p{
+    font-family: 'Blinker', sans-serif;
+    color: black;
+}
+.nick-name{
+    font-size: 30px;
+}
+.acct{
+    font-size: 20px;
+}
+.tstamp{
+    font-size: 18px;
+}
+.comp{
+    font-size: 20px;
+    background-color: rgb(89, 196, 89);
+    border-radius: 10px;
+}
+.pend{
+    background-color:tomato;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.catg{
+    font-size: 22px;
+}
+.amount{
+    font-size: 24px;
+}

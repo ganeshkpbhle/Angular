@@ -1,0 +1,24 @@
+.acct-list{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.msg-text{
+    font-size: 32px;
+    font-family: 'Blinker', sans-serif;
+}
+.msg-head{
+    font-size: 32px;
+    font-family: 'Blinker', sans-serif;
+    text-align: start;
+}
+.msg{
+    font-size: 22px;
+    text-align:start;
+    word-wrap: break-word;
+    font-family: 'Blinker', sans-serif;
+}
+.fa-triangle-exclamation{
+    color: red;
+}
